@@ -13,7 +13,9 @@ body {
 #slider {
     transition: transform 1s ease-in-out;
 }
-
+#slider img {
+    min-width: 100%;
+}
 /*  */
 .text-container {
     overflow: hidden;
