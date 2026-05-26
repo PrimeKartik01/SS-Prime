@@ -1,0 +1,32 @@
+body {
+    font-family: "Urbanist", sans-serif;
+}
+
+.blue-30 {
+    background-color: #dce7eb;
+}
+
+.font-lora {
+    font-family: "Lora", serif;
+}
+
+#slider {
+    transition: transform 1s ease-in-out;
+}
+
+/*  */
+.text-container {
+    overflow: hidden;
+}
+
+.animated-text {
+    animation: slideUp 1s ease-in-out;
+}
+
+@keyframes slideUp {
+
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}

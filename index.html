@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="index.css">
+    <title>SS-Prime</title>
+</head>
+
+<body>
+    <div class="blue-30 px-10">
+
+        <!-- Navbar -->
+        <nav class="flex justify-between items-center font-medium text-lg">
+            <img src="images/logo.webp" alt="logo" class="logo w-30 h-20 object-cover">
+            <ul class="flex gap-10">
+                <li>Home</li>
+                <li>Properties</li>
+                <li>About</li>
+            </ul>
+            <div class="rounded-full px-7 py-1 bg-black text-white">Contact Now</div>
+        </nav>
+
+        <!-- Header:Start -->
+        <header class="grid grid-cols-2 items-center">
+            <div class="flex flex-col gap-10">
+
+                <div class="flex gap-3 flex-col ">
+                    <div class="text-container">
+                        <p class="text-[4rem] text-pretty leading-14 font-lora animated-text">Discover Your Dream Home With SS Prime
+                        </p>
+                    </div>
+                    <p class="font-lora text-lg">Your Trusted Real Estate Partner</p>
+                </div>
+
+                <!-- Carousel -->
+                <div class="w-140 h-200 overflow-hidden relative ">
+                    <div id="slider" class="flex h-full animate-slide"></div>
+                </div>
+            </div>
+            <div class="w-full">
+                <img class="object-cover" src="images/building.jpg" alt="">
+            </div>
+        </header>
+        <!-- Header:End -->
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
