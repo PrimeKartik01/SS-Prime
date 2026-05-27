@@ -149,6 +149,9 @@ const flatPrice =
 const flatAvailability =
     document.getElementById("flatAvailability");
 
+const pricingBox =
+    document.getElementById("pricingBox");
+
 // Close Popup
 closeModal.addEventListener("click", () => {
 
@@ -180,8 +183,7 @@ function updateFlats(project) {
     });
 
     flatSelect.value = "";
-    flatPrice.innerText = "₹ 85 Lakhs";
-    flatAvailability.innerText = "Available";
+    pricingBox.classList.add("hidden");
 
 }
 
@@ -189,8 +191,7 @@ function updateFlats(project) {
 function updatePrice(project) {
 
     if (flatSelect.value === "") {
-        flatPrice.innerText = "₹ 85 Lakhs";
-        flatAvailability.innerText = "Available";
+        pricingBox.classList.add("hidden");
         return;
     }
 
@@ -202,6 +203,8 @@ function updatePrice(project) {
 
     flatAvailability.innerText =
         selectedFlat.available;
+
+    pricingBox.classList.remove("hidden");
 
 }
 
@@ -365,8 +368,7 @@ dynamicEnquireButtons.forEach((btn) => {
         } else {
             projectSelect.value = "";
             flatSelect.innerHTML = "<option value=\"\" disabled selected>Choose a flat type</option>";
-            flatPrice.innerText = "₹ 85 Lakhs";
-            flatAvailability.innerText = "Available";
+            pricingBox.classList.add("hidden");
         }
 
     });
