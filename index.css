@@ -19,6 +19,9 @@ body {
 .blue-30 {
     background-color: #10141f;
 }
+.blue-50 {
+    background-color: #5b6677;
+}
 /* Background colors: End */
 /* ----------------------------------- */
 
@@ -69,4 +72,53 @@ body {
     }
 }
 /*Animated Text: End */
+/* ----------------------------------- */
+
+
+
+@keyframes popup {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+.animate-popup {
+    animation: popup 0.4s ease;
+}
+
+/* ----------------------------------- */
+/* Custom Dropdown Styling: Start */
+select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em 1.2em;
+    padding-right: 2.5rem;
+}
+
+select option {
+    padding: 0.75rem;
+    background: white;
+    color: #1f2937;
+}
+
+select option:hover {
+    background: #f3f4f6;
+    color: #d4af37;
+}
+
+select option:checked {
+    background: linear-gradient(#d4af37, #d4af37);
+    background-color: #d4af37;
+    color: white;
+}
+/* Custom Dropdown Styling: End */
 /* ----------------------------------- */
