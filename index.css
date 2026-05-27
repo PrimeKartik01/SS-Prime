@@ -2,21 +2,57 @@ body {
     font-family: "Urbanist", sans-serif;
 }
 
-.blue-30 {
-    background-color: #dce7eb;
-}
-
+/* ----------------------------------- */
+/* Font Style: Start */
 .font-lora {
     font-family: "Lora", serif;
 }
+.font-semimedium {
+    font-weight: 450;
+}
+/* Font Style: End */
+/* ----------------------------------- */
 
+
+/* ----------------------------------- */
+/* Background colors: Start */
+.blue-30 {
+    background-color: #10141f;
+}
+/* Background colors: End */
+/* ----------------------------------- */
+
+
+/* ----------------------------------- */
+/* Slider : Start */
 #slider {
-    transition: transform 1s ease-in-out;
+    transition: transform 2s ease-in-out;
 }
 #slider img {
     min-width: 100%;
 }
-/*  */
+/* Soft content animation */
+.animate-content {
+    animation: smoothUp 1.2s ease;
+}
+
+@keyframes smoothUp {
+
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* Slider : End */
+/* ----------------------------------- */
+
+/* ----------------------------------- */
+/* Animated Text :Start */
 .text-container {
     overflow: hidden;
 }
@@ -32,3 +68,5 @@ body {
         opacity: 0;
     }
 }
+/*Animated Text: End */
+/* ----------------------------------- */
