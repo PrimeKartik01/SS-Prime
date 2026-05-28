@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Miami Residences</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/miami.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Red+Hat+Display:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50">
+
+        <div class="w-full flex justify-between items-center px-4 md:px-8 blue-30">
+
+            <!-- Logo -->
+            <img src="/images/home-section/site-logo.webp" alt="logo" class=" w-48 h-18  object-cover">
+
+            <!-- DESKTOP MENU -->
+
+            <ul class="hidden md:flex items-center gap-10 text-white relative">
+
+                <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
+                    Home
+                </li>
+
+                <!-- Projects Dropdown -->
+                <li class="relative group cursor-pointer">
+
+                    <div
+                        class="group flex items-center gap-2 hover:text-neutral-300 transition-all duration-900 cursor-pointer">
+
+                        Projects
+
+                        <span class="text-sm">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                class="w-5 h-5 transition-all duration-300 group-hover:rotate-180">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+
+                        </span>
+
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-10 left-0 w-64 bg-white rounded-3xl shadow-2xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-5 group-hover:translate-y-0 transition-all duration-500">
+
+                        <!-- Item1 -->
+                        <a href="pages/miami.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/miami.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Miami
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Luxury Apartments
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <!-- Item2 -->
+                        <a href="pages/montreal.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/pwc-montreal.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Montreal
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Duplex Residences
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <!-- Item3 -->
+                        <a href="pages/boston.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/boston.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Boston
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Skyline Living
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </li>
+
+                <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
+                    About
+                </li>
+
+            </ul>
+
+            <!-- Desktop Button -->
+            <button
+                class="enquire-btn hidden md:block rounded-full px-7 py-2 bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer">
+
+                Contact Now
+
+            </button>
+
+            <!-- MOBILE BUTTON -->
+
+            <button id="menu-btn" class="md:hidden text-3xl text-white">
+
+                ☰
+
+            </button>
+
+            <!-- MOBILE SIDEBAR -->
+
+            <div id="mobile-menu"
+                class="fixed top-0 left-[-100%] w-72 h-screen bg-white shadow-2xl z-50 p-6 transition-all duration-700 overflow-y-auto">
+
+                <!-- Close -->
+                <button id="close-btn" class="text-4xl absolute top-5 right-5">
+
+                    ×
+
+                </button>
+
+                <!-- Links -->
+                <ul class="flex flex-col gap-6 mt-20 text-base">
+
+                    <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
+                        Home
+                    </li>
+
+                    <!-- Mobile Dropdown -->
+                    <li>
+
+                        <!-- Dropdown Button -->
+                        <button id="mobile-project-btn"
+                            class="w-full flex justify-between items-center hover:translate-x-2 transition-all duration-300">
+
+                            <span>
+                                Projects
+                            </span>
+
+                            <span id="mobile-arrow" class="transition-all duration-300">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    class="w-5 h-5 transition-all duration-300 group-hover:rotate-180">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+
+                            </span>
+
+                        </button>
+
+                        <!-- Dropdown Content -->
+                        <div id="mobile-project-dropdown" class="hidden flex-col gap-4 mt-5 pl-2">
+
+                            <!-- Miami -->
+                            <a href="pages/miami.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/miami.webp" class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Miami
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Luxury Apartments
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <!-- Montreal -->
+                            <a href="pages/montreal.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/pwc-montreal.webp"
+                                    class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Montreal
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Duplex Homes
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <!-- Boston -->
+                            <a href="boston.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/boston.webp" class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Boston
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Skyline Residences
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </li>
+
+                    <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
+                        About
+                    </li>
+
+                    <!-- Button -->
+                    <button
+                        class="enquire-btn rounded-full px-7 py-3 bg-black text-white mt-5 hover:scale-105 transition-all duration-300 cursor-pointer">
+
+                        Contact Now
+
+                    </button>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ====================================================== -->
+    <!-- HERO SECTION -->
+    <!-- ====================================================== -->
+
+    <section class="relative min-h-screen overflow-hidden bg-[#0d0d0d] py-10 md:py-0">
+
+        <!-- Background -->
+        <img src="/images/header-slider/boston.webp" alt=""
+            class="hero-image absolute inset-0 w-full h-full object-cover opacity-60">
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/55"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 min-h-screen flex items-center">
+
+            <div class="grid lg:grid-cols-2 gap-5 md:gap-16 items-center w-full">
+
+                <!-- Left -->
+                <div class="text-white">
+
+                    <p class="hero-tagline uppercase tracking-[0.35rem] text-sm text-white/60 mb-5">
+
+                        Premium Residences
+
+                    </p>
+
+                    <h1 class="hero-title text-5xl md:text-8xl font-semibold leading-none mb-8">
+
+                        Miami
+                        <br>
+                        Residences
+
+                    </h1>
+
+                    <p class="hero-description text-lg text-neutral-300 leading-8 max-w-xl">
+
+                        Luxury apartments designed with spacious layouts,
+                        modern interiors and elevated lifestyle amenities.
+
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="hero-buttons flex md:flex-wrap gap-5 mt-10">
+
+                        <button
+                            class="enquire-btn primary-btn px-4 md:px-8 md:py-4 bg-white text-black rounded-full font-medium">
+
+                            Enquire Now
+
+                        </button>
+
+                        <button
+                            class="secondary-btn px-4 py-2 md:px-8 md:py-4 bg-green-800 border border-white/20 rounded-full">
+
+                            Download Brochure
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Card -->
+                <div
+                    class="hero-card bg-white/10 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 text-white">
+
+                    <div class="grid grid-cols-2 gap-8">
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Configuration
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                2 & 3 BHK
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Starting Price
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                ₹ 85L
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Possession
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                2028
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Amenities
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                40+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="w-full h-[1px] bg-white/10 my-8"></div>
+
+                    <p class="text-neutral-300 leading-7">
+
+                        Experience premium living with landscaped gardens,
+                        clubhouse, fitness spaces and elegant lifestyle amenities.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- ABOUT SECTION -->
+    <!-- ====================================================== -->
+
+    <section class="py-28 px-6 md:px-16 bg-white">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+                <!-- Images -->
+                <div class="grid grid-cols-2 gap-5">
+
+                    <img src="images/projects/miami/gallery-1.webp" alt=""
+                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] mt-14">
+
+                    <img src="images/projects/miami/gallery-2.webp" alt=""
+                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-3.webp" alt=""
+                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-4.webp" alt=""
+                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] -mt-14">
+
+                </div>
+
+                <!-- Content -->
+                <div>
+
+                    <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+
+                        About The Project
+
+                    </p>
+
+                    <h2 class="text-4xl md:text-6xl leading-tight font-semibold text-[#111827] mb-8">
+
+                        Modern Homes Crafted
+                        For Everyday Comfort
+
+                    </h2>
+
+                    <p class="text-lg text-neutral-600 leading-8 mb-10">
+
+                        Miami Residences combines thoughtful architecture,
+                        elegant interiors and premium amenities to create
+                        a balanced urban lifestyle experience.
+
+                    </p>
+
+                    <!-- Features -->
+                    <div class="space-y-8">
+
+                        <!-- Item -->
+                        <div class="flex gap-5">
+
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
+
+                                ✓
+
+                            </div>
+
+                            <div>
+
+                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
+
+                                    Spacious Layouts
+
+                                </h3>
+
+                                <p class="text-neutral-600 leading-7">
+
+                                    Large living spaces with natural light
+                                    and smart floor planning.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Item -->
+                        <div class="flex gap-5">
+
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
+
+                                ✓
+
+                            </div>
+
+                            <div>
+
+                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
+
+                                    Premium Amenities
+
+                                </h3>
+
+                                <p class="text-neutral-600 leading-7">
+
+                                    Swimming pool, clubhouse, landscaped
+                                    gardens and fitness zones.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- VIDEO SECTION -->
+    <!-- ====================================================== -->
+
+    <section class="py-28 px-6 md:px-16 bg-[#f5f5f5]">
+
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Heading -->
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+
+                <div>
+
+                    <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+
+                        Project Walkthrough
+
+                    </p>
+
+                    <h2 class="text-4xl md:text-6xl font-semibold text-[#111827] leading-tight">
+
+                        Explore The Experience
+
+                    </h2>
+
+                </div>
+
+                <p class="text-neutral-600 leading-8 max-w-xl">
+
+                    Discover the architecture, interiors and lifestyle
+                    through our cinematic project walkthrough.
+
+                </p>
+
+            </div>
+
+            <!-- Video -->
+            <div class="overflow-hidden rounded-[2rem] relative aspect-video w-full">
+                <iframe class="w-full h-full object-cover"
+                    src="https://www.youtube.com/embed/gu4zTzPKYC4?autoplay=1&mute=1&loop=1&playlist=gu4zTzPKYC4&controls=0&showinfo=0&rel=0&modestbranding=1"
+                    allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- GALLERY -->
+    <!-- ====================================================== -->
+
+    <section class="py-28 px-6 md:px-16 bg-white">
+
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-20">
+
+                <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+
+                    Gallery
+
+                </p>
+
+                <h2 class="text-4xl md:text-6xl font-semibold text-[#111827]">
+
+                    Project Highlights
+
+                </h2>
+
+            </div>
+
+            <!-- Masonry -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-1.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-2.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-3.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-4.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-5.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-6.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Popup Overlay:Start -->
+    <div id="enquiryModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] hidden items-center justify-center p-4 ">
+
+        <!-- Modal -->
+        <div
+            class="relative w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.25)] animate-popup">
+
+            <!-- Close Button -->
+            <button id="closeModal"
+                class="absolute max-sm:top-2 max-sm:right-2 top-5 right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 z-20">
+
+                ✕
+
+            </button>
+
+            <!-- Top Section -->
+            <div
+                class="bg-gradient-to-r from-[#1f2937] via-[#111827] to-[#0f172a] px-4 py-5 text-white relative overflow-hidden">
+
+                <div class="absolute top-0 right-0 w-52 h-52 bg-[#d4af37]/10 rounded-full blur-3xl">
+                </div>
+
+                <p class="uppercase tracking-[0.35rem] text-sm text-[#d4af37] mb-3">
+
+                    Enquire Now
+
+                </p>
+
+                <h2 class="text-xl md:text-4xl font-semibold">
+                    Find Your Perfect Home
+                </h2>
+
+                <p class="text-neutral-300 text-sm md:mt-4 leading-7">
+                    Fill in your details and our property expert will contact you shortly.
+                </p>
+
+            </div>
+
+            <!-- Form -->
+            <form id="modalEnquiryForm" class="p-2 md:p-6 ">
+
+                <div class="grid grid-cols-2 gap-2 md:gap-4">
+                    <!-- Name -->
+                    <div>
+                        <input type="text" placeholder="Enter your name" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Number -->
+                    <div>
+                        <input type="number" placeholder="Enter your number" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <input type="email" placeholder="Enter your email" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- City -->
+                    <div>
+                        <input type="text" placeholder="Enter your city" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Project -->
+                    <div>
+                        <select id="modalProjectSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+
+                            <option value="" disabled selected>Choose project</option>
+                            <option value="Miami">Miami</option>
+                            <option value="Montreal">Montreal</option>
+                            <option value="Boston">Boston</option>
+                        </select>
+                    </div>
+
+                    <!-- Flat Type -->
+                    <div>
+                        <select id="modalFlatSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+                            <option value="" disabled selected>Choose flat</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-col mt-2 md:mt-4">
+                    <!-- Pricing Box -->
+                    <div id="modalPricingBox"
+                        class="hidden md:col-span-2 bg-[#f8f6f1] rounded-[2rem] p-6 border border-[#e8dcc8]">
+
+                        <p class=" text-xs md:text-sm uppercase tracking-[0.25rem] text-[#b08d57] mb-3">
+                            Pricing & Availability
+                        </p>
+
+                        <h3 id="modalFlatPrice" class="text-3xl font-semibold text-[#1f2937]">
+
+
+
+                        </h3>
+
+                        <p id="modalFlatAvailability" class="text-green-600 mt-2 font-medium">
+
+
+
+                        </p>
+
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="md:col-span-2 w-full h-14 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+
+                        Submit Enquiry
+
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- Pop Overlay:End -->
+
+    <!-- Footer: Start -->
+    <footer class="bg-[#0f1720] text-white pt-20 pb-10 px-6 md:px-16 relative overflow-hidden">
+
+        <!-- Top Blur -->
+        <!-- <div class="absolute top-0 left-0 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div> -->
+
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Top Footer -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-14 pb-16 border-b border-white/10">
+
+                <!-- Brand -->
+                <div class="md:-mt-10">
+
+                    <img src="/images/home-section/site-logo.webp" alt="SS Prime Logo"
+                        class="w-60 h-30 object-cover mb-6 hover:scale-105 transition-all duration-500">
+
+                    <p class="text-neutral-400 leading-8 text-sm">
+
+                        Delivering premium real-estate experiences with
+                        luxury residences, modern amenities and prime
+                        investment opportunities.
+
+                    </p>
+
+                    <!-- Social -->
+                    <div class="flex gap-4 mt-8">
+
+                        <a href="#"
+                            class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:-translate-y-1 transition-all duration-300">
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </a>
+
+                        <a href="#"
+                            class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:-translate-y-1 transition-all duration-300">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="#"
+                            class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:-translate-y-1 transition-all duration-300">
+
+                            <i class="fa-brands fa-linkedin-in"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+
+                    <h2 class="text-xl font-semibold mb-6">
+                        Quick Links
+                    </h2>
+
+                    <ul class="space-y-4 text-neutral-400">
+
+                        <li>
+                            <a href="#"
+                                class="hover:text-white hover:translate-x-2 inline-block transition-all duration-300">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#"
+                                class="hover:text-white hover:translate-x-2 inline-block transition-all duration-300">
+                                Properties
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#"
+                                class="hover:text-white hover:translate-x-2 inline-block transition-all duration-300">
+                                About Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#"
+                                class="hover:text-white hover:translate-x-2 inline-block transition-all duration-300">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Projects -->
+                <div>
+
+                    <h2 class="text-xl font-semibold mb-6">
+                        Featured Projects
+                    </h2>
+
+                    <ul class="space-y-4 text-neutral-400">
+
+                        <li class="hover:text-white transition-all duration-300 cursor-pointer">
+                            Pride World City
+                        </li>
+
+                        <li class="hover:text-white transition-all duration-300 cursor-pointer">
+                            Miami Residences
+                        </li>
+
+                        <li class="hover:text-white transition-all duration-300 cursor-pointer">
+                            Montreal Duplex
+                        </li>
+
+                        <li class="hover:text-white transition-all duration-300 cursor-pointer">
+                            Boston Towers
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Contact -->
+                <div>
+
+                    <h2 class="text-xl font-semibold mb-6">
+                        Contact Info
+                    </h2>
+
+                    <div class="space-y-5 text-neutral-400">
+
+                        <p class="leading-7">
+                            Pune, Maharashtra, India
+                        </p>
+
+                        <a href="tel:+919999999999" class="block hover:text-white transition-all duration-300">
+
+                            +91 99999 99999
+
+                        </a>
+
+                        <a href="mailto:info@ssprime.com" class="block hover:text-white transition-all duration-300">
+
+                            info@ssprime.com
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-5">
+
+                <p class="text-neutral-500 text-sm text-center md:text-left">
+                    © 2026 SS Prime. All rights reserved.
+                </p>
+
+                <div class="flex gap-6 text-sm text-neutral-500">
+
+                    <a href="#" class="hover:text-white transition-all duration-300">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#" class="hover:text-white transition-all duration-300">
+                        Terms & Conditions
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <!-- Footer:End -->
+
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
+
+    <script src="../index.js" type="module"></script>
+</body>
+
+</html>

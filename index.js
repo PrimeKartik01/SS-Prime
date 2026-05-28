@@ -4,33 +4,83 @@ import { slides, projects, projectFlats } from "./data/data.js";
 
 //------------------------------------------------------------------------------------------------
 // Navbar functionality: Start
+// =====================================================
+// MOBILE MENU
+// =====================================================
+
 const menuBtn = document.getElementById("menu-btn");
+
 const closeBtn = document.getElementById("close-btn");
+
 const mobileMenu = document.getElementById("mobile-menu");
 
 // Open Menu
 menuBtn.addEventListener("click", () => {
+
     mobileMenu.classList.remove("left-[-100%]");
+
     mobileMenu.classList.add("left-0");
+
 });
 
+// Close Function
 function closeMenu() {
+
     mobileMenu.classList.remove("left-0");
+
     mobileMenu.classList.add("left-[-100%]");
+
 }
 
-// Close Menu button
+// Close Button
 closeBtn.addEventListener("click", closeMenu);
 
-// Close when clicking outside the menu
+// Click Outside
 document.addEventListener("click", (event) => {
-    const isMenuOpen = mobileMenu.classList.contains("left-0");
-    const clickInsideMenu = mobileMenu.contains(event.target);
-    const clickOnButton = menuBtn.contains(event.target);
 
-    if (isMenuOpen && !clickInsideMenu && !clickOnButton) {
+    const isMenuOpen =
+        mobileMenu.classList.contains("left-0");
+
+    const clickInsideMenu =
+        mobileMenu.contains(event.target);
+
+    const clickOnButton =
+        menuBtn.contains(event.target);
+
+    if (
+        isMenuOpen &&
+        !clickInsideMenu &&
+        !clickOnButton
+    ) {
+
         closeMenu();
+
     }
+
+});
+
+// =====================================================
+// MOBILE PROJECT DROPDOWN
+// =====================================================
+
+const mobileProjectBtn =
+    document.getElementById("mobile-project-btn");
+
+const mobileProjectDropdown =
+    document.getElementById("mobile-project-dropdown");
+
+const mobileArrow =
+    document.getElementById("mobile-arrow");
+
+// Toggle Dropdown
+mobileProjectBtn.addEventListener("click", () => {
+
+    mobileProjectDropdown.classList.toggle("hidden");
+
+    mobileProjectDropdown.classList.toggle("flex");
+
+    mobileArrow.classList.toggle("rotate-180");
+
 });
 
 // Navbar functionality: End
@@ -130,97 +180,182 @@ setInterval(changeSlide, 4500);
 
 //------------------------------------------------------------------------------------------------
 // Form Logic: Start
+
+// Toast Notification Function
+function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = `px-6 py-4 rounded-2xl shadow-2xl text-white font-medium flex items-center gap-3 translate-y-[-20px] opacity-0 transition-all duration-500 pointer-events-auto ${type === "success"
+            ? "bg-gradient-to-r from-[#1f2937] to-[#0f172a] border border-[#d4af37]/30 text-[#f5d68a]"
+            : "bg-gradient-to-r from-red-600 to-rose-700 border border-red-500/20 text-white"
+        }`;
+
+    // Icon
+    const icon = type === "success"
+        ? `<svg class="w-6 h-6 text-[#d4af37]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+        : `<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+
+    toast.innerHTML = `
+        ${icon}
+        <span class="text-sm md:text-base">${message}</span>
+    `;
+
+    const container = document.getElementById("toastContainer");
+    if (container) {
+        container.appendChild(toast);
+        // Trigger transition
+        setTimeout(() => {
+            toast.classList.remove("translate-y-[-20px]", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+        }, 10);
+
+        // Remove after 4 seconds
+        setTimeout(() => {
+            toast.classList.remove("translate-y-0", "opacity-100");
+            toast.classList.add("translate-y-[-20px]", "opacity-0");
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+}
+
+// Reusable Enquiry Form Controller
+function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, priceId, availId) {
+    const form = document.getElementById(formId);
+    const projSelect = document.getElementById(selectProjId);
+    const flatSel = document.getElementById(selectFlatId);
+    const pBox = document.getElementById(pricingBoxId);
+    const fPrice = document.getElementById(priceId);
+    const fAvail = document.getElementById(availId);
+
+    if (!form || !projSelect || !flatSel || !pBox || !fPrice || !fAvail) return null;
+
+    function populateFlats(project) {
+        flatSel.innerHTML = '<option value="" disabled selected>Choose flat</option>';
+        if (projectFlats[project]) {
+            projectFlats[project].forEach((flat, index) => {
+                flatSel.innerHTML += `<option value="${index}">${flat.type}</option>`;
+            });
+        }
+        flatSel.value = "";
+        pBox.classList.add("hidden");
+    }
+
+    function populatePrice(project) {
+        if (flatSel.value === "") {
+            pBox.classList.add("hidden");
+            return;
+        }
+        const selectedFlat = projectFlats[project][flatSel.value];
+        if (selectedFlat) {
+            fPrice.innerText = selectedFlat.price;
+            fAvail.innerText = selectedFlat.available;
+
+            // Availability styling based on value
+            if (selectedFlat.available.toLowerCase().includes("few")) {
+                fAvail.className = "text-amber-500 mt-2 font-medium";
+            } else if (selectedFlat.available.toLowerCase().includes("sold") || selectedFlat.available.toLowerCase().includes("no")) {
+                fAvail.className = "text-rose-500 mt-2 font-medium";
+            } else {
+                fAvail.className = "text-green-500 mt-2 font-medium";
+            }
+            pBox.classList.remove("hidden");
+        }
+    }
+
+    projSelect.addEventListener("change", () => {
+        populateFlats(projSelect.value);
+    });
+
+    flatSel.addEventListener("change", () => {
+        populatePrice(projSelect.value);
+    });
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const nameInput = form.querySelector('input[placeholder*="name"]');
+        const numberInput = form.querySelector('input[placeholder*="number"]');
+        const emailInput = form.querySelector('input[placeholder*="email"]');
+        const cityInput = form.querySelector('input[placeholder*="city"]');
+
+        const name = nameInput ? nameInput.value.trim() : "";
+        const number = numberInput ? numberInput.value.trim() : "";
+        const email = emailInput ? emailInput.value.trim() : "";
+        const city = cityInput ? cityInput.value.trim() : "";
+        const project = projSelect.value;
+        const flatIndex = flatSel.value;
+
+        if (!name || !number || !email || !city || !project || flatIndex === "") {
+            showToast("Please fill in all the details correctly.", "error");
+            return;
+        }
+
+        const flat = projectFlats[project][flatIndex].type;
+
+        console.log(`Enquiry submitted from form #${formId}:`, { name, number, email, city, project, flat });
+
+        // Show luxury toast notification
+        showToast(`Thank you, ${name}! Your enquiry for ${project} (${flat}) has been received.`);
+
+        // Reset form state
+        form.reset();
+        pBox.classList.add("hidden");
+        flatSel.innerHTML = '<option value="" disabled selected>Choose flat</option>';
+
+        // If popup modal form, close modal
+        if (formId === "modalEnquiryForm") {
+            const modal = document.getElementById("enquiryModal");
+            if (modal) {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+        }
+    });
+
+    return {
+        setProject: (project) => {
+            projSelect.value = project;
+            populateFlats(project);
+        }
+    };
+}
+
 // Elements
-const enquiryModal =
-    document.getElementById("enquiryModal");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const projectSelect =
-    document.getElementById("projectSelect");
-
-const flatSelect =
-    document.getElementById("flatSelect");
-
-const flatPrice =
-    document.getElementById("flatPrice");
-
-const flatAvailability =
-    document.getElementById("flatAvailability");
-
-const pricingBox =
-    document.getElementById("pricingBox");
+const enquiryModal = document.getElementById("enquiryModal");
+const closeModal = document.getElementById("closeModal");
 
 // Close Popup
 closeModal.addEventListener("click", () => {
-
     enquiryModal.classList.add("hidden");
     enquiryModal.classList.remove("flex");
-
-});
-closeModal.addEventListener("click", () => {
-
-    enquiryModal.classList.add("hidden");
-    enquiryModal.classList.remove("flex");
-
 });
 
-// Update Flats
-function updateFlats(project) {
-
-    flatSelect.innerHTML = "<option value=\"\" disabled selected>Choose a flat type</option>";
-
-    projectFlats[project].map((flat, index) => {
-
-        flatSelect.innerHTML += `
-        
-            <option value="${index}">
-                ${flat.type}
-            </option>
-
-        `;
-    });
-
-    flatSelect.value = "";
-    pricingBox.classList.add("hidden");
-
-}
-
-// Update Price
-function updatePrice(project) {
-
-    if (flatSelect.value === "") {
-        pricingBox.classList.add("hidden");
-        return;
+// Close Popup on Outside Click
+enquiryModal.addEventListener("click", (e) => {
+    if (e.target === enquiryModal) {
+        enquiryModal.classList.add("hidden");
+        enquiryModal.classList.remove("flex");
     }
-
-    const selectedFlat =
-        projectFlats[project][flatSelect.value];
-
-    flatPrice.innerText =
-        selectedFlat.price;
-
-    flatAvailability.innerText =
-        selectedFlat.available;
-
-    pricingBox.classList.remove("hidden");
-
-}
-
-// Project Change
-projectSelect.addEventListener("change", () => {
-
-    updateFlats(projectSelect.value);
-
 });
 
-// Flat Change
-flatSelect.addEventListener("change", () => {
+// Initialize Form Controllers
+const modalController = initEnquiryForm(
+    "modalEnquiryForm",
+    "modalProjectSelect",
+    "modalFlatSelect",
+    "modalPricingBox",
+    "modalFlatPrice",
+    "modalFlatAvailability"
+);
 
-    updatePrice(projectSelect.value);
+const inlineController = initEnquiryForm(
+    "inlineEnquiryForm",
+    "inlineProjectSelect",
+    "inlineFlatSelect",
+    "inlinePricingBox",
+    "inlineFlatPrice",
+    "inlineFlatAvailability"
+);
 
-});
 // Form Logic: End
 //------------------------------------------------------------------------------------------------
 
@@ -363,12 +498,16 @@ dynamicEnquireButtons.forEach((btn) => {
         enquiryModal.classList.add("flex");
 
         if (project) {
-            projectSelect.value = project;
-            updateFlats(project);
+            if (modalController) {
+                modalController.setProject(project);
+            }
         } else {
-            projectSelect.value = "";
-            flatSelect.innerHTML = "<option value=\"\" disabled selected>Choose a flat type</option>";
-            pricingBox.classList.add("hidden");
+            const modalProjSelect = document.getElementById("modalProjectSelect");
+            if (modalProjSelect) modalProjSelect.value = "";
+            const modalFlatSelect = document.getElementById("modalFlatSelect");
+            if (modalFlatSelect) modalFlatSelect.innerHTML = "<option value=\"\" disabled selected>Choose flat</option>";
+            const modalPricingBox = document.getElementById("modalPricingBox");
+            if (modalPricingBox) modalPricingBox.classList.add("hidden");
         }
 
     });
@@ -466,3 +605,5 @@ sliders.forEach((slider, index) => {
 
 // Project Card Section: End
 //------------------------------------------------------------------------------------------------
+
+

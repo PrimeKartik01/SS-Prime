@@ -1,0 +1,154 @@
+/* ========================================================= */
+/* GLOBAL */
+/* ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Urbanist", sans-serif;
+    background: #f5f7fb;
+    overflow-x: hidden;
+}
+
+/* h1,
+h2,
+h3 {
+    font-family: "PT Serif", serif;
+} */
+
+/* ========================================================= */
+/* ANIMATIONS */
+/* ========================================================= */
+
+@keyframes heroImage {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+
+}
+
+@keyframes fadeSlideUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(70px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fadeRight {
+
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+/* ========================================================= */
+/* HERO */
+/* ========================================================= */
+
+.hero-image {
+    animation: heroImage 12s ease-in-out infinite alternate;
+}
+
+.hero-tagline {
+    opacity: 0;
+    animation: fadeSlideUp 0.8s ease forwards;
+}
+
+.hero-title {
+    opacity: 0;
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.hero-description {
+    opacity: 0;
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+.hero-buttons {
+    opacity: 0;
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+.hero-card {
+    opacity: 0;
+    animation: fadeRight 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+/* ========================================================= */
+/* HOVERS */
+/* ========================================================= */
+
+.about-image {
+    transition: all 0.6s ease;
+}
+
+.about-image:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.gallery-image {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-image img {
+    transition: transform 0.8s ease;
+}
+
+.gallery-image:hover img {
+    transform: scale(1.08);
+}
+
+.primary-btn {
+    transition: all 0.4s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+}
+
+.secondary-btn {
+    transition: all 0.4s ease;
+}
+
+.secondary-btn:hover {
+    background: white;
+    color: black;
+}
+
+/* ========================================================= */
+/* MOBILE */
+/* ========================================================= */
+
+@media (max-width:768px) {
+
+    .hero-title {
+        line-height: 1.1;
+    }
+
+}

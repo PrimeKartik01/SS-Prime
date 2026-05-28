@@ -16,29 +16,115 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Custome CSS -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>SS-Prime</title>
 </head>
 
 <body>
 
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="sticky top-0 z-50">
 
-        <div class="blue-30 w-full flex justify-between items-center px-3">
+        <div class="w-full flex justify-between items-center px-4 md:px-8 blue-30">
 
             <!-- Logo -->
-            <img src="images/home-section/site-logo.webp" alt="logo" class="logo w-48 h-18 object-cover">
+            <img src="images/home-section/site-logo.webp" alt="logo" class=" w-48 h-18  object-cover">
 
-            <!-- Desktop Menu -->
-            <ul class="hidden text-white md:flex gap-10">
+            <!-- DESKTOP MENU -->
+
+            <ul class="hidden md:flex items-center gap-10 text-white relative">
 
                 <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
                     Home
                 </li>
 
-                <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
-                    Properties
+                <!-- Projects Dropdown -->
+                <li class="relative group cursor-pointer">
+
+                    <div
+                        class="group flex items-center gap-2 hover:text-neutral-300 transition-all duration-900 cursor-pointer">
+
+                        Projects
+
+                        <span class="text-sm">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                class="w-5 h-5 transition-all duration-300 group-hover:rotate-180">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+
+                        </span>
+
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-10 left-0 w-64 bg-white rounded-3xl shadow-2xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-5 group-hover:translate-y-0 transition-all duration-500">
+
+                        <!-- Item1 -->
+                        <a href="pages/miami.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/miami.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Miami
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Luxury Apartments
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <!-- Item2 -->
+                        <a href="pages/montreal.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/pwc-montreal.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Montreal
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Duplex Residences
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <!-- Item3 -->
+                        <a href="pages/boston.html"
+                            class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                            <img src="images/header-slider/boston.webp" class="w-16 h-16 object-cover rounded-xl">
+
+                            <div>
+
+                                <h3 class="text-black font-semibold">
+                                    Boston
+                                </h3>
+
+                                <p class="text-sm text-neutral-500">
+                                    Skyline Living
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
                 </li>
 
                 <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
@@ -48,47 +134,139 @@
             </ul>
 
             <!-- Desktop Button -->
-            <div
-                class="hidden md:block rounded-full px-7 py-2 bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer">
+            <button
+                class="enquire-btn hidden md:block rounded-full px-7 py-2 bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer">
 
                 Contact Now
 
-            </div>
+            </button>
 
-            <!-- Mobile Menu Button -->
+            <!-- MOBILE BUTTON -->
+
             <button id="menu-btn" class="md:hidden text-3xl text-white">
 
                 ☰
 
             </button>
 
-            <!-- Mobile Sidebar -->
-            <div id="mobile-menu"
-                class="fixed top-0 left-[-100%] w-60 h-screen bg-white shadow-2xl z-50 p-5 transition-all duration-1000">
+            <!-- MOBILE SIDEBAR -->
 
-                <!-- Close Button -->
+            <div id="mobile-menu"
+                class="fixed top-0 left-[-100%] w-72 h-screen bg-white shadow-2xl z-50 p-6 transition-all duration-700 overflow-y-auto">
+
+                <!-- Close -->
                 <button id="close-btn" class="text-4xl absolute top-5 right-5">
 
                     ×
 
                 </button>
 
+                <!-- Links -->
                 <ul class="flex flex-col gap-6 mt-20 text-base">
 
                     <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
                         Home
                     </li>
 
-                    <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
-                        Properties
+                    <!-- Mobile Dropdown -->
+                    <li>
+
+                        <!-- Dropdown Button -->
+                        <button id="mobile-project-btn"
+                            class="w-full flex justify-between items-center hover:translate-x-2 transition-all duration-300">
+
+                            <span>
+                                Projects
+                            </span>
+
+                            <span id="mobile-arrow" class="transition-all duration-300">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    class="w-5 h-5 transition-all duration-300 group-hover:rotate-180">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+
+                            </span>
+
+                        </button>
+
+                        <!-- Dropdown Content -->
+                        <div id="mobile-project-dropdown" class="hidden flex-col gap-4 mt-5 pl-2">
+
+                            <!-- Miami -->
+                            <a href="pages/miami.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/miami.webp" class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Miami
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Luxury Apartments
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <!-- Montreal -->
+                            <a href="pages/montreal.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/pwc-montreal.webp"
+                                    class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Montreal
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Duplex Homes
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <!-- Boston -->
+                            <a href="boston.html"
+                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
+
+                                <img src="images/header-slider/boston.webp" class="w-14 h-14 rounded-xl object-cover">
+
+                                <div>
+
+                                    <h3 class="font-semibold text-black">
+                                        Boston
+                                    </h3>
+
+                                    <p class="text-sm text-neutral-500">
+                                        Skyline Residences
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
                     </li>
 
                     <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
                         About
                     </li>
 
+                    <!-- Button -->
                     <button
-                        class="rounded-full px-7 py-3 bg-black text-white mt-5 hover:scale-105 transition-all duration-300">
+                        class="enquire-btn rounded-full px-7 py-3 bg-black text-white mt-5 hover:scale-105 transition-all duration-300 cursor-pointer">
 
                         Contact Now
 
@@ -97,6 +275,8 @@
                 </ul>
 
             </div>
+
+        </div>
 
     </nav>
 
@@ -351,9 +531,9 @@
 
     </section>
 
-    <!-- Popup Overlay -->
+    <!-- Popup Overlay:Start -->
     <div id="enquiryModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] hidden items-center justify-center p-4">
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] hidden items-center justify-center p-4 ">
 
         <!-- Modal -->
         <div
@@ -361,7 +541,7 @@
 
             <!-- Close Button -->
             <button id="closeModal"
-                class="absolute top-5 right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 z-20">
+                class="absolute max-sm:top-2 max-sm:right-2 top-5 right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 z-20">
 
                 ✕
 
@@ -380,97 +560,103 @@
 
                 </p>
 
-                <h2 class="text-3xl md:text-4xl font-semibold">
+                <h2 class="text-xl md:text-4xl font-semibold">
                     Find Your Perfect Home
                 </h2>
 
-                <p class="text-neutral-300 mt-4 leading-7">
+                <p class="text-neutral-300 text-sm md:mt-4 leading-7">
                     Fill in your details and our property expert will contact you shortly.
                 </p>
 
             </div>
 
             <!-- Form -->
-            <form class="p-8 grid md:grid-cols-2 gap-2">
+            <form id="modalEnquiryForm" class="p-2 md:p-6 ">
 
-                <!-- Name -->
-                <div>
-                    <input type="text" placeholder="Enter your name"
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37]">
+                <div class="grid grid-cols-2 gap-2 md:gap-4">
+                    <!-- Name -->
+                    <div>
+                        <input type="text" placeholder="Enter your name" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Number -->
+                    <div>
+                        <input type="number" placeholder="Enter your number" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <input type="email" placeholder="Enter your email" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- City -->
+                    <div>
+                        <input type="text" placeholder="Enter your city" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Project -->
+                    <div>
+                        <select id="modalProjectSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+
+                            <option value="" disabled selected>Choose project</option>
+                            <option value="Miami">Miami</option>
+                            <option value="Montreal">Montreal</option>
+                            <option value="Boston">Boston</option>
+                        </select>
+                    </div>
+
+                    <!-- Flat Type -->
+                    <div>
+                        <select id="modalFlatSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+                            <option value="" disabled selected>Choose flat</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Number -->
-                <div>
-                    <input type="number" placeholder="Enter your number"
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37]">
+                <div class="flex gap-2 flex-col mt-2 md:mt-4">
+                    <!-- Pricing Box -->
+                    <div id="modalPricingBox"
+                        class="hidden md:col-span-2 bg-[#f8f6f1] rounded-[2rem] p-6 border border-[#e8dcc8]">
+
+                        <p class=" text-xs md:text-sm uppercase tracking-[0.25rem] text-[#b08d57] mb-3">
+                            Pricing & Availability
+                        </p>
+
+                        <h3 id="modalFlatPrice" class="text-3xl font-semibold text-[#1f2937]">
+
+
+
+                        </h3>
+
+                        <p id="modalFlatAvailability" class="text-green-600 mt-2 font-medium">
+
+
+
+                        </p>
+
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="md:col-span-2 w-full h-14 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+
+                        Submit Enquiry
+
+                    </button>
                 </div>
-
-                <!-- Email -->
-                <div>
-                    <input type="email" placeholder="Enter your email"
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37]">
-                </div>
-
-                <!-- City -->
-                <div>
-                    <input type="text" placeholder="Enter your city"
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37]">
-                </div>
-
-                <!-- Project -->
-                <div>
-                    <select id="projectSelect"
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium transition-all duration-300">
-
-                        <option value="" disabled selected>Choose a project</option>
-                        <option value="Miami">Miami</option>
-                        <option value="Montreal">Montreal</option>
-                        <option value="Boston">Boston</option>
-                    </select>
-                </div>
-
-                <!-- Flat Type -->
-                <div>
-                    <select id="flatSelect" 
-                        class="w-full h-14 px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium transition-all duration-300">
-                        <option value="" disabled selected>Choose a flat type</option>
-                    </select>
-                </div>
-
-                <!-- Pricing Box -->
-                <div id="pricingBox" class="hidden md:col-span-2 bg-[#f8f6f1] rounded-[2rem] p-6 border border-[#e8dcc8]">
-
-                    <p class="text-sm uppercase tracking-[0.25rem] text-[#b08d57] mb-3">
-                        Pricing & Availability
-                    </p>
-
-                    <h3 id="flatPrice" class="text-3xl font-semibold text-[#1f2937]">
-
-                        ₹ 85 Lakhs
-
-                    </h3>
-
-                    <p id="flatAvailability" class="text-green-600 mt-2 font-medium">
-
-                        Available
-
-                    </p>
-
-                </div>
-
-                <!-- Button -->
-                <button
-                    class="md:col-span-2 h-14 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-[1.02] transition-all duration-300">
-
-                    Submit Enquiry
-
-                </button>
 
             </form>
 
         </div>
 
     </div>
+    <!-- Pop Overlay:End -->
 
     <!-- Project Section: Start -->
     <section
@@ -525,6 +711,116 @@
 
     </section>
     <!-- Project Section: End -->
+
+    <!-- Inline Enquiry Section: Start -->
+    <section
+        class="py-20 px-6 md:px-16 bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a] relative overflow-hidden">
+
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-[25rem] h-[25rem] bg-[#d4af37]/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-white/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <!-- Heading -->
+            <div class="text-center mb-12">
+                <p class="uppercase tracking-[0.45rem] text-sm text-[#d4af37] mb-4 font-semibold">
+                    Get In Touch
+                </p>
+                <h2 class="text-4xl md:text-5xl font-semibold text-white leading-tight">
+                    Request Call Back & <span
+                        class="bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] bg-clip-text text-transparent">Pricing
+                        Details</span>
+                </h2>
+                <p class="mt-4 text-neutral-300 max-w-xl mx-auto leading-7">
+                    Submit your details below and our luxury property consultant will get in touch with you in 24 hours.
+                </p>
+            </div>
+
+            <!-- Form Container (Glassmorphism) -->
+            <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-6 md:p-10 shadow-2xl">
+                <form id="inlineEnquiryForm" class="grid md:grid-cols-2 gap-6">
+
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Full
+                            Name</label>
+                        <input type="text" placeholder="Enter your name" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
+                    </div>
+
+                    <!-- Number -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Contact
+                            Number</label>
+                        <input type="number" placeholder="Enter your number" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Email
+                            Address</label>
+                        <input type="email" placeholder="Enter your email" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
+                    </div>
+
+                    <!-- City -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Your
+                            City</label>
+                        <input type="text" placeholder="Enter your city" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
+                    </div>
+
+                    <!-- Project -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Select
+                            Project</label>
+                        <select id="inlineProjectSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-neutral-300 outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] appearance-none bg-white cursor-pointer text-xs md:text-base transition-all duration-300">
+                            <option value="" disabled selected class="bg-[#1f2937] text-white">Choose project</option>
+                            <option value="Miami" class="bg-[#1f2937] text-white">Miami</option>
+                            <option value="Montreal" class="bg-[#1f2937] text-white">Montreal</option>
+                            <option value="Boston" class="bg-[#1f2937] text-white">Boston</option>
+                        </select>
+                    </div>
+
+                    <!-- Flat Type -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Select
+                            Flat Type</label>
+                        <select id="inlineFlatSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-neutral-300 outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] appearance-none bg-white cursor-pointer text-xs md:text-base transition-all duration-300">
+                            <option value="" disabled selected class="bg-[#1f2937] text-white">Choose flat
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Pricing Box -->
+                    <div id="inlinePricingBox"
+                        class="hidden md:col-span-2 bg-white/5 rounded-[2rem] p-6 border border-white/10">
+                        <p class="text-sm uppercase tracking-[0.25rem] text-[#d4af37] mb-3">
+                            Pricing & Availability
+                        </p>
+                        <h3 id="inlineFlatPrice" class="text-3xl font-semibold text-white">
+                            ₹ 85 Lakhs
+                        </h3>
+                        <p id="inlineFlatAvailability" class="text-green-400 mt-2 font-medium">
+                            Available
+                        </p>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="md:col-span-2 h-14 rounded-full bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] text-black font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[#d4af37]/20">
+                        Submit Enquiry
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Inline Enquiry Section: End -->
 
     <!-- Sticky CTA Buttons -->
     <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
@@ -772,6 +1068,9 @@
 
     </footer>
     <!-- Footer:End -->
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
 
     <script src="index.js" type="module"></script>
 </body>
