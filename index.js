@@ -35,6 +35,16 @@ function closeMenu() {
 // Close Button
 closeBtn.addEventListener("click", closeMenu);
 
+// Close mobile menu when clicking a link
+if (mobileMenu) {
+    const mobileLinks = mobileMenu.querySelectorAll("a[href^='#'], a[href*='#']");
+    mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            closeMenu();
+        });
+    });
+}
+
 // Click Outside
 document.addEventListener("click", (event) => {
 
@@ -122,7 +132,7 @@ if (slider) { allSlides.map((slide) => {
                     Prime world City
                 </p>
 
-                <h1 class="text-3xl md:text-8xl leading-tight font-semibold mb-4 animate-content">
+                <h1 class="text-5xl md:text-8xl leading-tight font-semibold mb-4 animate-content">
                     ${slide.title}
                 </h1>
 
@@ -374,10 +384,10 @@ if (container) { projects.map((project, index) => {
 
     container.innerHTML += `
 
-    <div class="bg-white/70 backdrop-blur-xl flex flex-col md:flex-row rounded-[1.5rem] overflow-hidden border border-white/40 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 group">
+    <div id="${project.name.toLowerCase()}" class="scroll-mt-24 md:h-[35rem] bg-white/70 backdrop-blur-xl flex flex-col md:flex-row rounded-[1.5rem] overflow-hidden border border-white/40 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 group">
 
         <!-- Carousel -->
-        <div class="relative overflow-hidden flex w-1/2">
+        <div class="relative overflow-hidden w-full md:w-1/2 h-72 md:h-full">
 
             <!-- Slider -->
             <div id="slider-${index}"
@@ -439,14 +449,18 @@ if (container) { projects.map((project, index) => {
         </div>
 
         <!-- Content -->
-        <div class="p-7">
+        <div class="p-3 md:p-7 flex flex-col justify-between w-full md:w-1/2">
+
+            <h2 class="text-5xl font-semibold mb-2">
+                ${project.name}
+            </h2>
 
             <!-- Tags -->
-            <div class="flex flex-wrap gap-3 mb-6">
+            <div class="flex flex-wrap gap-2 mb-5">
 
                 ${project.tags.map((tag) => `
 
-                    <span class="px-4 py-2 rounded-full bg-[#f5efe6] text-[#8f6b32] text-sm font-medium border border-[#e8dcc8]">
+                    <span class="px-4 py-1.5 rounded-full bg-[#f5efe6] text-[#8f6b32] text-xs font-semibold border border-[#e8dcc8]">
                         ${tag}
                     </span>
 
@@ -454,24 +468,54 @@ if (container) { projects.map((project, index) => {
 
             </div>
 
-            <!-- Description -->
-            <p class="text-neutral-600 leading-7 mb-7">
-                ${project.description}
-            </p>
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-[#f8f6f1] rounded-2xl p-2 md:p-4 mb-5 border border-[#e8dcc8]">
+
+                ${project.stats.map((s) => `
+                    <div class="text-center">
+                        <p class="text-xl md:text-2xl font-bold text-[#1f2937]">${s.value}</p>
+                        <p class="text-[9px] md:text-xs text-neutral-500 uppercase tracking-wider mt-0.5">${s.label}</p>
+                    </div>
+                `).join("")}
+
+            </div>
+
+            <!-- Features Checklist -->
+            <div  class="grid md:grid-cols-2  gap-2">
+                <ul class="space-y-2 mb-6">
+
+                    ${project.features.map((f) => `
+                        <li class="flex items-start gap-2 text-sm text-neutral-700">
+                            <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#d4af37]/15 flex items-center justify-center text-[#b08d57]">✔</span>
+                            ${f}
+                        </li>
+                    `).join("")}
+
+                </ul>
+                   
+                <div class="flex flex-row justify-between items-center gap-2 p-4 border border-[#e8dcc8] rounded-xl h-max">
+                    ${project.qr.map((qr) => `
+                        <div class="flex flex-col items-center gap-2">
+                            <img src="${qr.img}" alt="QR Code" class="w-30 h-30 rounded-lg">
+                            <p class="text-xs text-center">${qr.number}</p>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
 
             <!-- Buttons -->
-            <div class="flex gap-4">
+            <div class="flex gap-2 md:gap-4 max-sm:mt-2">
 
                 <button
                     data-project="${project.name}"
-                    class="enquire-btn flex-1 py-3 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
+                    class="enquire-btn flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
 
                     Enquire
 
                 </button>
 
                 <a href="${project.link}"
-                    class="flex-1 py-3 rounded-full border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
+                    class="flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
 
                     Download Brochure
 

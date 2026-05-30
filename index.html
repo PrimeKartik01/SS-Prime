@@ -21,13 +21,13 @@
     <!-- Mapbox -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <title>Prime World City</title>
+    <title>Pride World City</title>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
-    <nav class="sticky top-0 z-50">
+    <nav class="sticky top-0 z-50 shadow-2xl bg-white/90 backdrop-blur-md">
 
         <div class="w-full flex justify-between items-center px-4 md:px-8 bg-white">
 
@@ -68,7 +68,7 @@
                         class="absolute top-10 left-0 w-64 bg-white rounded-3xl shadow-2xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-5 group-hover:translate-y-0 transition-all duration-500">
 
                         <!-- Item1 -->
-                        <a href="pages/miami.html"
+                        <a href="#miami"
                             class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                             <img src="images/header-slider/miami.webp" class="w-16 h-16 object-cover rounded-xl">
@@ -88,7 +88,7 @@
                         </a>
 
                         <!-- Item2 -->
-                        <a href="pages/montreal.html"
+                        <a href="#montreal"
                             class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                             <img src="images/header-slider/pwc-montreal.webp" class="w-16 h-16 object-cover rounded-xl">
@@ -108,7 +108,7 @@
                         </a>
 
                         <!-- Item3 -->
-                        <a href="pages/boston.html"
+                        <a href="#boston"
                             class="flex items-center gap-4 p-4 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                             <img src="images/header-slider/boston.webp" class="w-16 h-16 object-cover rounded-xl">
@@ -131,12 +131,16 @@
 
                 </li>
 
-                <li class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
-                    About
+                <li>
+                    <a href="#about" class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
+                        About
+                    </a>
                 </li>
 
-                <li class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
-                    Location
+                <li>
+                    <a href="#map" class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
+                        Location
+                    </a>
                 </li>
 
             </ul>
@@ -151,7 +155,7 @@
 
             <!-- MOBILE BUTTON -->
 
-            <button id="menu-btn" class="md:hidden text-3xl text-white">
+            <button id="menu-btn" class="md:hidden text-3xl text-black">
 
                 ☰
 
@@ -160,7 +164,7 @@
             <!-- MOBILE SIDEBAR -->
 
             <div id="mobile-menu"
-                class="fixed top-0 left-[-100%] w-72 h-screen bg-white shadow-2xl z-50 p-6 transition-all duration-700 overflow-y-auto">
+                class="fixed top-0 left-[-100%] w-58 h-screen bg-white shadow-2xl z-50 p-6 transition-all duration-700 overflow-y-auto">
 
                 <!-- Close -->
                 <button id="close-btn" class="text-4xl absolute top-5 right-5">
@@ -204,7 +208,7 @@
                         <div id="mobile-project-dropdown" class="hidden flex-col gap-4 mt-5 pl-2">
 
                             <!-- Miami -->
-                            <a href="pages/miami.html"
+                            <a href="#miami"
                                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                                 <img src="images/header-slider/miami.webp" class="w-14 h-14 rounded-xl object-cover">
@@ -224,7 +228,7 @@
                             </a>
 
                             <!-- Montreal -->
-                            <a href="pages/montreal.html"
+                            <a href="#montreal"
                                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                                 <img src="images/header-slider/pwc-montreal.webp"
@@ -245,7 +249,7 @@
                             </a>
 
                             <!-- Boston -->
-                            <a href="boston.html"
+                            <a href="#boston"
                                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-neutral-100 transition-all duration-300">
 
                                 <img src="images/header-slider/boston.webp" class="w-14 h-14 rounded-xl object-cover">
@@ -268,8 +272,16 @@
 
                     </li>
 
-                    <li class="hover:translate-x-2 transition-all duration-300 cursor-pointer">
-                        About
+                    <li>
+                        <a href="#about" class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#map" class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
+                            Location
+                        </a>
                     </li>
 
                     <!-- Button -->
@@ -289,13 +301,13 @@
     </nav>
 
     <!-- Carousel -->
-    <div class="w-full h-[43rem]  overflow-hidden relative carousel-container">
+    <div class="w-full h-[28rem] md:h-[43rem]  overflow-hidden relative carousel-container">
         <div id="slider" class="flex h-full"></div>
     </div>
     </div>
 
     <!-- Introduction: Start -->
-    <section
+    <section id="about"
         class="py-24 px-6 md:px-16 bg-gradient-to-br from-[#f6f5f2] via-[#d6dac8] to-[#9ca986] relative overflow-hidden">
 
         <!-- Luxury Background Blur -->
@@ -414,12 +426,12 @@
                             </div>
 
                             <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                3
+                                5M+
                             </h4>
                         </div>
 
                         <p class="text-sm text-neutral-500 mt-2">
-                            Premium Clusters
+                           Sq.ft completed
                         </p>
 
                     </div>
@@ -445,12 +457,12 @@
                             </div>
 
                             <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                Prime
+                                8M 
                             </h4>
                         </div>
 
                         <p class="text-sm text-neutral-500 mt-2">
-                            Connected Location
+                            Sq.ft Under Construction
                         </p>
 
                     </div>
@@ -489,54 +501,21 @@
 
     </section>
 
-    <!-- Luxury Separator Section -->
-    <section
-        class="relative py-5 px-6 md:px-16 overflow-hidden bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a]">
-
-        <!-- Background Glow -->
-        <div class="absolute top-0 left-0 w-[30rem] h-[30rem] bg-[#d4af37]/10 rounded-full blur-3xl">
-        </div>
-
-        <div class="absolute bottom-0 right-0 w-[25rem] h-[25rem] bg-white/5 rounded-full blur-3xl">
-        </div>
-
-        <!-- Grid -->
-        <div class="max-w-7xl mx-auto gap-16 items-center relative z-10">
-
-            <!-- Left Content -->
-            <div class="text-center ">
-
-                <p class="uppercase tracking-[0.45rem] text-xl text-[#d4af37] mb-5 font-medium">
-
-                    Crafted For Modern Living
-
-                </p>
-
-                <h2 class="text-4xl md:text-6xl font-semibold leading-tight text-white mb-8">
-
-                    Elevating Everyday
-
-                    <span
-                        class="bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] bg-clip-text text-transparent">
-
-                        Luxury Experiences
-
-                    </span>
-
-                </h2>
-
-                <p class="text-neutral-300 text-lg leading-8">
-
-                    Every residence is thoughtfully designed to blend
-                    sophistication, comfort and timeless architecture &
-                    creating spaces where elegance meets effortless living.
-
-                </p>
-
+    <!-- Amenities:Start -->
+    <div class="flex flex-col justify-center items-center py-6 ">
+        <h2 class="text-2xl md:text-4xl font-bold text-center text-slate-800 pt-7 ">
+            Location Advantages
+        </h2>
+        <div class="p-4 md:w-5/6">
+            <div class="rounded-4xl w-full mx-auto bg-gray-200 p-4 ">
+                <div id="amenities-container"
+                    class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6  justify-items-center">
+                </div>
             </div>
         </div>
+    </div>
+    <!-- Amenities:Start -->
 
-    </section>
 
     <!-- Popup Overlay:Start -->
     <div id="enquiryModal"
@@ -719,8 +698,8 @@
     </section>
     <!-- Project Section: End -->
 
-     <!-- Map:start -->
-    <section class="py-16 px-5 bg-gray-200">
+    <!-- Map:start -->
+    <section class="py-16 px-5 bg-gray-200" href="#map">
 
         <div class="mx-auto">
 
@@ -759,22 +738,21 @@
                     <!-- Distance -->
                     <div class="bg-gray-100 rounded-2xl p-4">
 
-                        <h3 class="text-lg md:text-2xl font-bold text-gray-900">
-                            Distance Details
-                        </h3>
+                        <div class="flex gap-2">
 
-                        <div class="grid grid-cols-2 gap-2">
-
-                            <h2 id="distanceText" class="text-md md:text-xl font-bold text-green-600">
+                            <h2 id="distanceText" class="text-md md:text-3xl font-bold bg-gray-700 px-2 py-3 rounded-2xl text-white">
                                 — KM
                             </h2>
 
-                            <p id="durationText" class="text-md md:text-xl font-bold text-blue-600">
+                            <p id="durationText" class="text-md md:text-3xl font-bold bg-gray-700 px-2 py-3 rounded-2xl text-white">
                                 — Minutes
                             </p>
 
                         </div>
 
+                        <h3 class="text-lg md:text-2xl font-bold text-gray-900">
+                            Distance Details
+                        </h3>
 
                         <div class=" space-y-3 flex gap-1">
 
@@ -818,25 +796,24 @@
     <!-- Map:End -->
 
     <!-- Inline Enquiry Section: Start -->
-    <section
-        class="py-20 px-6 md:px-16 bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a] relative overflow-hidden">
+    <section class="py-20 px-6 md:px-16 bg-white relative overflow-hidden">
 
         <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-[25rem] h-[25rem] bg-[#d4af37]/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 right-0 w-[25rem] h-[25rem] rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-white/5 rounded-full blur-3xl"></div>
 
         <div class="max-w-4xl mx-auto relative z-10">
             <!-- Heading -->
             <div class="text-center mb-12">
-                <p class="uppercase tracking-[0.45rem] text-sm text-[#d4af37] mb-4 font-semibold">
+                <p class="uppercase tracking-[0.45rem] text-2xl text-gray-500 mb-4 font-semibold">
                     Get In Touch
                 </p>
-                <h2 class="text-4xl md:text-5xl font-semibold text-white leading-tight">
+                <h2 class="text-4xl md:text-5xl font-semibold text-blue-700 leading-tight">
                     Request Call Back & <span
-                        class="bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] bg-clip-text text-transparent">Pricing
+                        class="">Pricing
                         Details</span>
                 </h2>
-                <p class="mt-4 text-neutral-300 max-w-xl mx-auto leading-7">
+                <p class="mt-4 text-gray-500 max-w-xl mx-auto leading-7">
                     Submit your details below and our luxury property consultant will get in touch with you in 24 hours.
                 </p>
             </div>
@@ -847,7 +824,7 @@
 
                     <!-- Name -->
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Full
+                        <label class="block text-xs uppercase tracking-wider text-gray-700 mb-2 font-medium">Full
                             Name</label>
                         <input type="text" placeholder="Enter your name" required
                             class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
@@ -907,7 +884,7 @@
                         <p class="text-sm uppercase tracking-[0.25rem] text-[#d4af37] mb-3">
                             Pricing & Availability
                         </p>
-                        <h3 id="inlineFlatPrice" class="text-3xl font-semibold text-white">
+                        <h3 id="inlineFlatPrice" class="text-3xl font-semibold">
                             ₹ 85 Lakhs
                         </h3>
                         <p id="inlineFlatAvailability" class="text-green-400 mt-2 font-medium">
@@ -917,7 +894,7 @@
 
                     <!-- Button -->
                     <button type="submit"
-                        class="md:col-span-2 h-14 rounded-full bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] text-black font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[#d4af37]/20">
+                        class="md:col-span-2 h-14 rounded-full bg-green-700 text-white font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[#d4af37]/20">
                         Submit Enquiry
                     </button>
 
@@ -928,18 +905,12 @@
     <!-- Inline Enquiry Section: End -->
 
     <!-- Sticky CTA Buttons -->
-    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
+    <div class="fixed bottom-5 right-5 z-50">
 
-        <div
-            class="flex items-center gap-3 bg-white/90 backdrop-blur-xl shadow-2xl px-3 py-3 rounded-full border border-neutral-200">
-
-            <!-- WhatsApp -->
-            <!-- WhatsApp -->
-
-
+        <div class="flex  flex-col items-center gap-3 px-3 py-3">
             <!-- Call -->
             <a href="tel:+919999999999"
-                class="flex items-center gap-2 px-5 py-3 rounded-full bg-black text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
+                class="flex items-center gap-2 px-5 md:px-8 py-3 rounded-full bg-green-500 text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="w-5 h-5">
@@ -1161,6 +1132,7 @@
     <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
 
     <script src="index.js" type="module"></script>
+    <script src="./function_js/amenities.js" type="module"></script>
 
     <!-- LEAFLET JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
