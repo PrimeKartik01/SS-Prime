@@ -9,22 +9,25 @@
 
     <title>Miami Residences</title>
 
-    <!-- Fonts -->
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/miami.css">
+    <link rel="stylesheet" href="/css/index.css">
+
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/miami.css">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Red+Hat+Display:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
 
     <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Mapbox -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+
 
 </head>
 
@@ -288,16 +291,22 @@
 
     </nav>
 
-
     <!-- ====================================================== -->
     <!-- HERO SECTION -->
     <!-- ====================================================== -->
 
-    <section class="relative min-h-screen overflow-hidden bg-[#0d0d0d] py-10 md:py-0">
+    <section class="relative min-h-screen overflow-hidden py-10 lg:py-0">
 
-        <!-- Background -->
-        <img src="/images/header-slider/boston.webp" alt=""
-            class="hero-image absolute inset-0 w-full h-full object-cover opacity-60">
+        <!-- Background Images -->
+        <div class="absolute inset-0 overflow-hidden">
+
+            <!-- Current -->
+            <img id="heroImage1" src="" class="hero-bg absolute inset-0 w-full h-full object-cover opacity-100">
+
+            <!-- Next -->
+            <img id="heroImage2" src="" class="hero-bg absolute inset-0 w-full h-full object-cover opacity-0">
+
+        </div>
 
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black/55"></div>
@@ -305,44 +314,34 @@
         <!-- Content -->
         <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 min-h-screen flex items-center">
 
-            <div class="grid lg:grid-cols-2 gap-5 md:gap-16 items-center w-full">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-14 items-center w-full">
 
-                <!-- Left -->
-                <div class="text-white">
+                <!-- LEFT -->
+                <div class="hero-content text-white">
 
-                    <p class="hero-tagline uppercase tracking-[0.35rem] text-sm text-white/60 mb-5">
-
-                        Premium Residences
-
+                    <!-- Tagline -->
+                    <p id="heroTagline" class="uppercase tracking-[0.35rem] text-sm text-white/60 mb-5">
                     </p>
 
-                    <h1 class="hero-title text-5xl md:text-8xl font-semibold leading-none mb-8">
-
-                        Miami
-                        <br>
-                        Residences
-
+                    <!-- Title -->
+                    <h1 id="heroTitle" class="hero-title text-5xl md:text-8xl font-semibold leading-none mb-8">
                     </h1>
 
-                    <p class="hero-description text-lg text-neutral-300 leading-8 max-w-xl">
-
-                        Luxury apartments designed with spacious layouts,
-                        modern interiors and elevated lifestyle amenities.
-
+                    <!-- Description -->
+                    <p id="heroDescription" class="text-lg text-neutral-300 leading-8 max-w-xl">
                     </p>
 
                     <!-- Buttons -->
-                    <div class="hero-buttons flex md:flex-wrap gap-5 mt-10">
+                    <div class="flex flex-wrap gap-5 mt-10">
 
-                        <button
-                            class="enquire-btn primary-btn px-4 md:px-8 md:py-4 bg-white text-black rounded-full font-medium">
+                        <button class="enquire-btn primary-btn px-8 py-4 bg-white text-black rounded-full font-medium">
 
                             Enquire Now
 
                         </button>
 
                         <button
-                            class="secondary-btn px-4 py-2 md:px-8 md:py-4 bg-green-800 border border-white/20 rounded-full">
+                            class="secondary-btn px-8 py-4 bg-green-800 border border-white/20 rounded-full text-white">
 
                             Download Brochure
 
@@ -352,9 +351,8 @@
 
                 </div>
 
-                <!-- Right Card -->
-                <div
-                    class="hero-card bg-white/10 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 text-white">
+                <!-- RIGHT CARD -->
+                <div class="glass-card rounded-[2.5rem] p-8 text-white">
 
                     <div class="grid grid-cols-2 gap-8">
 
@@ -364,8 +362,7 @@
                                 Configuration
                             </p>
 
-                            <h3 class="text-3xl font-semibold">
-                                2 & 3 BHK
+                            <h3 id="heroConfiguration" class="text-3xl font-semibold">
                             </h3>
 
                         </div>
@@ -376,8 +373,7 @@
                                 Starting Price
                             </p>
 
-                            <h3 class="text-3xl font-semibold">
-                                ₹ 85L
+                            <h3 id="heroPrice" class="text-3xl font-semibold">
                             </h3>
 
                         </div>
@@ -388,8 +384,7 @@
                                 Possession
                             </p>
 
-                            <h3 class="text-3xl font-semibold">
-                                2028
+                            <h3 id="heroPossession" class="text-3xl font-semibold">
                             </h3>
 
                         </div>
@@ -400,8 +395,7 @@
                                 Amenities
                             </p>
 
-                            <h3 class="text-3xl font-semibold">
-                                40+
+                            <h3 id="heroAmenities" class="text-3xl font-semibold">
                             </h3>
 
                         </div>
@@ -410,11 +404,7 @@
 
                     <div class="w-full h-[1px] bg-white/10 my-8"></div>
 
-                    <p class="text-neutral-300 leading-7">
-
-                        Experience premium living with landscaped gardens,
-                        clubhouse, fitness spaces and elegant lifestyle amenities.
-
+                    <p id="heroCardDescription" class="text-neutral-300 leading-7">
                     </p>
 
                 </div>
@@ -429,134 +419,48 @@
     <!-- ABOUT SECTION -->
     <!-- ====================================================== -->
 
-    <section class="py-28 px-6 md:px-16 bg-white">
-
+    <!-- ABOUT SECTION -->
+    <section class="py-10 px-4 md:py-28 md:px-16 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto">
 
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class=" flex flex-col-reverse lg:flex-row gap-10 md:gap-20 items-center">
+                <div id="aboutGalleryContainer" class="grid md:grid-cols-2 gap-5"></div>
 
-                <!-- Images -->
-                <div class="grid grid-cols-2 gap-5">
-
-                    <img src="images/projects/miami/gallery-1.webp" alt=""
-                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] mt-14">
-
-                    <img src="images/projects/miami/gallery-2.webp" alt=""
-                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-3.webp" alt=""
-                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-4.webp" alt=""
-                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] -mt-14">
-
-                </div>
-
-                <!-- Content -->
                 <div>
-
-                    <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
-
+                    <p class="uppercase tracking-[0.35rem] max-sm:text-center text-sm text-neutral-400 mb-5">
                         About The Project
-
                     </p>
-
-                    <h2 class="text-4xl md:text-6xl leading-tight font-semibold text-[#111827] mb-8">
-
-                        Modern Homes Crafted
-                        For Everyday Comfort
-
+                    <h2 id="aboutTitle"
+                        class="text-3xl md:text-6xl leading-tight font-semibold text-[#111827] mb-8 max-sm:text-center">
                     </h2>
+                    <p id="aboutDescription"
+                        class="text-md md:text-lg max-sm:text-center text-neutral-600 md:leading-8 mb-10"></p>
 
-                    <p class="text-lg text-neutral-600 leading-8 mb-10">
-
-                        Miami Residences combines thoughtful architecture,
-                        elegant interiors and premium amenities to create
-                        a balanced urban lifestyle experience.
-
-                    </p>
-
-                    <!-- Features -->
-                    <div class="space-y-8">
-
-                        <!-- Item -->
-                        <div class="flex gap-5">
-
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
-
-                                ✓
-
-                            </div>
-
-                            <div>
-
-                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
-
-                                    Spacious Layouts
-
-                                </h3>
-
-                                <p class="text-neutral-600 leading-7">
-
-                                    Large living spaces with natural light
-                                    and smart floor planning.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Item -->
-                        <div class="flex gap-5">
-
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
-
-                                ✓
-
-                            </div>
-
-                            <div>
-
-                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
-
-                                    Premium Amenities
-
-                                </h3>
-
-                                <p class="text-neutral-600 leading-7">
-
-                                    Swimming pool, clubhouse, landscaped
-                                    gardens and fitness zones.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                    <div id="aboutFeaturesContainer" class="space-y-8"></div>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- ====================================================== -->
-    <!-- VIDEO SECTION -->
-    <!-- ====================================================== -->
+    <!-- Amenities:Start -->
+    <div class=" w-full mx-auto bg-gray-200 p-8 ">
+        <h2 class="text-2xl md:text-4xl font-bold text-center text-slate-800 mb-8 tracking-tight">
+            Location Advanatges
+        </h2>
 
-    <section class="py-28 px-6 md:px-16 bg-[#f5f5f5]">
+        <div id="amenities-container"
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6  justify-items-center">
+        </div>
+    </div>
+    <!-- Amenities:Start -->
+
+    <!-- VIDEO SECTION: Start-->
+    <section class="py-15 md:py-28 px-6 md:px-16 bg-[#f5f5f5]">
 
         <div class="max-w-7xl mx-auto">
 
             <!-- Heading -->
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+            <div class="flex flex-col md:items-start  gap-6 md:gap-7 mb-8 md:mb-14">
 
                 <div>
 
@@ -574,7 +478,7 @@
 
                 </div>
 
-                <p class="text-neutral-600 leading-8 max-w-xl">
+                <p class="text-neutral-600 leading-8 md:text-2xl">
 
                     Discover the architecture, interiors and lifestyle
                     through our cinematic project walkthrough.
@@ -584,7 +488,7 @@
             </div>
 
             <!-- Video -->
-            <div class="overflow-hidden rounded-[2rem] relative aspect-video w-full">
+            <div class="overflow-hidden rounded-[1rem] relative aspect-video w-full">
                 <iframe class="w-full h-full object-cover"
                     src="https://www.youtube.com/embed/gu4zTzPKYC4?autoplay=1&mute=1&loop=1&playlist=gu4zTzPKYC4&controls=0&showinfo=0&rel=0&modestbranding=1"
                     allow="autoplay; encrypted-media" allowfullscreen>
@@ -594,68 +498,168 @@
         </div>
 
     </section>
+    <!-- Video Section: End -->
 
-    <!-- ====================================================== -->
-    <!-- GALLERY -->
-    <!-- ====================================================== -->
+    <!-- Gallery -->
+    <section class="relative overflow-hidden bg-[#9dadaf] py-20 text-white">
 
-    <section class="py-28 px-6 md:px-16 bg-white">
-
-        <div class="max-w-7xl mx-auto">
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
 
             <!-- Heading -->
-            <div class="text-center mb-20">
 
-                <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+            <div class="mb-14 text-center text-white">
 
-                    Gallery
+                <h1 class="mb-3 text-2xl md:text-4xl font-semibold uppercase tracking-[0.35em]">
+                    Project Gallery
+                </h1>
 
+                <p class="mx-auto mt-5 max-w-2xl text-base leading-7">
+                    Discover premium interiors, world-class amenities,
+                    and elegant living spaces crafted for modern lifestyles.
                 </p>
-
-                <h2 class="text-4xl md:text-6xl font-semibold text-[#111827]">
-
-                    Project Highlights
-
-                </h2>
 
             </div>
 
-            <!-- Masonry -->
-            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+            <!-- Gallery Grid -->
 
-                <div class="gallery-image rounded-[2rem]">
+            <div id="homeGallery" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
 
-                    <img src="images/projects/miami/gallery-1.webp" class="rounded-[2rem] w-full">
+        </div>
+
+    </section>
+
+    <!-- Modal -->
+
+    <div id="galleryModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-5 backdrop-blur-md">
+
+        <!-- Close -->
+
+        <button
+            class="gallery-close-btn absolute right-6 top-6 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-2xl text-white transition hover:bg-white hover:text-black">
+            ✕
+        </button>
+
+        <!-- Prev -->
+
+        <button class="gallery-prev-btn absolute left-6 z-20 text-5xl text-white">
+            ‹
+        </button>
+
+        <!-- Image -->
+
+        <img src="" alt=""
+            class="gallery-modal-image max-h-[85vh] w-auto max-w-full rounded-3xl object-cover transition-all duration-300">
+
+        <!-- Next -->
+
+        <button class="gallery-next-btn absolute right-6 z-20 text-5xl text-white">
+            ›
+        </button>
+
+        <!-- Bottom -->
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+
+            <p class="gallery-modal-caption text-center text-sm uppercase tracking-[0.3em] text-white">
+            </p>
+
+            <div class="gallery-modal-dots mt-4 flex justify-center gap-2">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Map:start -->
+    <section class="py-16 px-5 bg-gray-200">
+
+        <div class="mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-12">
+
+                <h1 class="text-5xl font-bold text-gray-900">
+                    Location Advantages
+                </h1>
+
+                <p class="text-gray-500 mt-4">
+                    Click any location to see route &amp; distance
+                </p>
+
+            </div>
+
+            <div class="flex flex-col-reverse lg:flex-row gap-8">
+
+                <!-- LEFT SIDE -->
+                <div class="bg-white rounded-3xl shadow-2xl p-6 flex flex-col gap-4">
+
+                    <!-- Base Location -->
+                    <div class="bg-gray-700 text-white p-5 rounded-2xl">
+
+                        <h2 class="text-2xl font-bold">
+                            📍 Pride World City
+                        </h2>
+
+                        <p class="text-gray-300 mt-3 text-sm leading-7">
+                            Charholi Budruk, adjacent to DY Patil Knowledge City Road,
+                            Annex, Dhanori, Pune, Maharashtra 412105
+                        </p>
+
+                    </div>
+
+                    <!-- Distance -->
+                    <div class="bg-gray-100 rounded-2xl p-4">
+
+                        <h3 class="text-lg md:text-2xl font-bold text-gray-900">
+                            Distance Details
+                        </h3>
+
+                        <div class="grid grid-cols-2 gap-2">
+
+                            <h2 id="distanceText" class="text-md md:text-xl font-bold text-green-600">
+                                — KM
+                            </h2>
+
+                            <p id="durationText" class="text-md md:text-xl font-bold text-blue-600">
+                                — Minutes
+                            </p>
+
+                        </div>
+
+
+                        <div class=" space-y-3 flex gap-1">
+
+                            <p class="text-xs md:text-xl text-gray-600 w-full">
+                                From:
+                                <span class="font-bold">
+                                    Pride World City
+                                </span>
+                            </p>
+
+                            <p class="text-xs md:text-xl text-gray-600 w-full">
+                                To:
+                                <span id="selectedLocation" class="font-bold">
+                                    Airport
+                                </span>
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Dynamic Locations -->
+                    <div id="locationContainer" class=" grid grid-cols-2 gap-2"></div>
 
                 </div>
 
-                <div class="gallery-image rounded-[2rem]">
+                <!-- MAP -->
+                <div class="w-full h-full bg-white rounded-3xl shadow-2xl p-4">
 
-                    <img src="images/projects/miami/gallery-2.webp" class="rounded-[2rem] w-full">
-
-                </div>
-
-                <div class="gallery-image rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-3.webp" class="rounded-[2rem] w-full">
-
-                </div>
-
-                <div class="gallery-image rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-4.webp" class="rounded-[2rem] w-full">
-
-                </div>
-
-                <div class="gallery-image rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-5.webp" class="rounded-[2rem] w-full">
-
-                </div>
-
-                <div class="gallery-image rounded-[2rem]">
-
-                    <img src="images/projects/miami/gallery-6.webp" class="rounded-[2rem] w-full">
+                    <div id="map"></div>
 
                 </div>
 
@@ -664,133 +668,58 @@
         </div>
 
     </section>
+    <!-- Map:End -->
 
-    <!-- Popup Overlay:Start -->
-    <div id="enquiryModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] hidden items-center justify-center p-4 ">
+    <!-- Sticky CTA Buttons -->
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
 
-        <!-- Modal -->
         <div
-            class="relative w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.25)] animate-popup">
+            class="flex items-center gap-3 bg-white/90 backdrop-blur-xl shadow-2xl px-3 py-3 rounded-full border border-neutral-200">
 
-            <!-- Close Button -->
-            <button id="closeModal"
-                class="absolute max-sm:top-2 max-sm:right-2 top-5 right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 z-20">
+            <!-- WhatsApp -->
+            <!-- WhatsApp -->
 
-                ✕
+
+            <!-- Call -->
+            <a href="tel:+919999999999"
+                class="flex items-center gap-2 px-5 py-3 rounded-full bg-black text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-5 h-5">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.1 1.05a11.04 11.04 0 005.52 5.52l1.05-2.1a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V5z" />
+
+                </svg>
+
+                <span class="hidden md:block">
+                    Call
+                </span>
+
+            </a>
+
+            <!-- Enquire -->
+            <button
+                class="enquire-btn flex items-center gap-2 px-5 py-3 rounded-full border border-neutral-300 bg-white hover:bg-black hover:text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-5 h-5">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 10h8M8 14h5m-9 7h16a2 2 0 002-2V5a2 2 0 00-2-2H4a2 2 0 00-2 2v14a2 2 0 002 2z" />
+
+                </svg>
+
+                <span class="hidden md:block">
+                    Enquire
+                </span>
 
             </button>
-
-            <!-- Top Section -->
-            <div
-                class="bg-gradient-to-r from-[#1f2937] via-[#111827] to-[#0f172a] px-4 py-5 text-white relative overflow-hidden">
-
-                <div class="absolute top-0 right-0 w-52 h-52 bg-[#d4af37]/10 rounded-full blur-3xl">
-                </div>
-
-                <p class="uppercase tracking-[0.35rem] text-sm text-[#d4af37] mb-3">
-
-                    Enquire Now
-
-                </p>
-
-                <h2 class="text-xl md:text-4xl font-semibold">
-                    Find Your Perfect Home
-                </h2>
-
-                <p class="text-neutral-300 text-sm md:mt-4 leading-7">
-                    Fill in your details and our property expert will contact you shortly.
-                </p>
-
-            </div>
-
-            <!-- Form -->
-            <form id="modalEnquiryForm" class="p-2 md:p-6 ">
-
-                <div class="grid grid-cols-2 gap-2 md:gap-4">
-                    <!-- Name -->
-                    <div>
-                        <input type="text" placeholder="Enter your name" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
-                    </div>
-
-                    <!-- Number -->
-                    <div>
-                        <input type="number" placeholder="Enter your number" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
-                    </div>
-
-                    <!-- Email -->
-                    <div>
-                        <input type="email" placeholder="Enter your email" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
-                    </div>
-
-                    <!-- City -->
-                    <div>
-                        <input type="text" placeholder="Enter your city" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
-                    </div>
-
-                    <!-- Project -->
-                    <div>
-                        <select id="modalProjectSelect" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
-
-                            <option value="" disabled selected>Choose project</option>
-                            <option value="Miami">Miami</option>
-                            <option value="Montreal">Montreal</option>
-                            <option value="Boston">Boston</option>
-                        </select>
-                    </div>
-
-                    <!-- Flat Type -->
-                    <div>
-                        <select id="modalFlatSelect" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
-                            <option value="" disabled selected>Choose flat</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flex gap-2 flex-col mt-2 md:mt-4">
-                    <!-- Pricing Box -->
-                    <div id="modalPricingBox"
-                        class="hidden md:col-span-2 bg-[#f8f6f1] rounded-[2rem] p-6 border border-[#e8dcc8]">
-
-                        <p class=" text-xs md:text-sm uppercase tracking-[0.25rem] text-[#b08d57] mb-3">
-                            Pricing & Availability
-                        </p>
-
-                        <h3 id="modalFlatPrice" class="text-3xl font-semibold text-[#1f2937]">
-
-
-
-                        </h3>
-
-                        <p id="modalFlatAvailability" class="text-green-600 mt-2 font-medium">
-
-
-
-                        </p>
-
-                    </div>
-
-                    <!-- Button -->
-                    <button type="submit"
-                        class="md:col-span-2 w-full h-14 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-[1.02] transition-all duration-300 cursor-pointer">
-
-                        Submit Enquiry
-
-                    </button>
-                </div>
-
-            </form>
 
         </div>
 
     </div>
-    <!-- Pop Overlay:End -->
+
 
     <!-- Footer: Start -->
     <footer class="bg-[#0f1720] text-white pt-20 pb-10 px-6 md:px-16 relative overflow-hidden">
@@ -806,7 +735,7 @@
                 <!-- Brand -->
                 <div class="md:-mt-10">
 
-                    <img src="/images/home-section/site-logo.webp" alt="SS Prime Logo"
+                    <img src="images/home-section/site-logo.webp" alt="SS Prime Logo"
                         class="w-60 h-30 object-cover mb-6 hover:scale-105 transition-all duration-500">
 
                     <p class="text-neutral-400 leading-8 text-sm">
@@ -972,11 +901,144 @@
     </footer>
     <!-- Footer:End -->
 
+    <!-- Popup Overlay:Start -->
+    <div id="enquiryModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] hidden items-center justify-center p-4 ">
 
-    <!-- Toast Notification Container -->
-    <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
+        <!-- Modal -->
+        <div
+            class="relative w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.25)] animate-popup">
 
+            <!-- Close Button -->
+            <button id="closeModal"
+                class="absolute max-sm:top-2 max-sm:right-2 top-5 right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300 z-20">
+
+                ✕
+
+            </button>
+
+            <!-- Top Section -->
+            <div
+                class="bg-gradient-to-r from-[#1f2937] via-[#111827] to-[#0f172a] px-4 py-5 text-white relative overflow-hidden">
+
+                <div class="absolute top-0 right-0 w-52 h-52 bg-[#d4af37]/10 rounded-full blur-3xl">
+                </div>
+
+                <button class="enquire-btn uppercase tracking-[0.35rem] text-sm text-[#d4af37] mb-3">
+
+                    Enquire Now
+
+                </button>
+
+                <h2 class="text-xl md:text-4xl font-semibold">
+                    Find Your Perfect Home
+                </h2>
+
+                <p class="text-neutral-300 text-sm md:mt-4 leading-7">
+                    Fill in your details and our property expert will contact you shortly.
+                </p>
+
+            </div>
+
+            <!-- Form -->
+            <form id="modalEnquiryForm" class="p-2 md:p-6 ">
+
+                <div class="grid grid-cols-2 gap-2 md:gap-4">
+                    <!-- Name -->
+                    <div>
+                        <input type="text" placeholder="Enter your name" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Number -->
+                    <div>
+                        <input type="number" placeholder="Enter your number" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <input type="email" placeholder="Enter your email" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- City -->
+                    <div>
+                        <input type="text" placeholder="Enter your city" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] placeholder:text-xs md:placeholder:text-base">
+                    </div>
+
+                    <!-- Project -->
+                    <div>
+                        <select id="modalProjectSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+
+                            <option value="" disabled selected>Choose project</option>
+                            <option value="Miami">Miami</option>
+                            <option value="Montreal">Montreal</option>
+                            <option value="Boston">Boston</option>
+                        </select>
+                    </div>
+
+                    <!-- Flat Type -->
+                    <div>
+                        <select id="modalFlatSelect" required
+                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-neutral-200 outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 appearance-none bg-white cursor-pointer text-neutral-700 font-medium text-xs md:text-base transition-all duration-300">
+                            <option value="" disabled selected>Choose flat</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-col mt-2 md:mt-4">
+                    <!-- Pricing Box -->
+                    <div id="modalPricingBox"
+                        class="hidden md:col-span-2 bg-[#f8f6f1] rounded-[2rem] p-6 border border-[#e8dcc8]">
+
+                        <p class=" text-xs md:text-sm uppercase tracking-[0.25rem] text-[#b08d57] mb-3">
+                            Pricing & Availability
+                        </p>
+
+                        <h3 id="modalFlatPrice" class="text-3xl font-semibold text-[#1f2937]">
+
+
+
+                        </h3>
+
+                        <p id="modalFlatAvailability" class="text-green-600 mt-2 font-medium">
+
+
+
+                        </p>
+
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="md:col-span-2 w-full h-14 rounded-full bg-gradient-to-r from-[#1f2937] to-[#111827] text-white hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+
+                        Submit Enquiry
+
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- Pop Overlay:End -->
+
+    <!-- ====================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ====================================================== -->
+
+    <script src="../function_js/miami.js" type="module"></script>
     <script src="../index.js" type="module"></script>
+    <!-- LEAFLET JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
 </body>
 
 </html>

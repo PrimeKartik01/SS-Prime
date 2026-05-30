@@ -99,7 +99,7 @@ const allSlides = [...slides, slides[0]];
 const slider = document.getElementById("slider");
 
 // Create Slides
-allSlides.map((slide) => {
+if (slider) { allSlides.map((slide) => {
 
     slider.innerHTML += `
 
@@ -139,7 +139,7 @@ allSlides.map((slide) => {
         </div>
 
     `;
-});
+}); }
 
 let current = 0;
 
@@ -147,8 +147,9 @@ function changeSlide() {
 
     current++;
 
+    if (!slider) return;
     const slideWidth =
-        document.querySelector(".carousel-container").clientWidth;
+        document.querySelector(".carousel-container")?.clientWidth || 0;
 
     slider.style.transition =
         "transform 2s ease-in-out";
@@ -173,7 +174,7 @@ function changeSlide() {
 }
 
 // Auto Slide
-setInterval(changeSlide, 4500);
+if (slider) { setInterval(changeSlide, 4500); }
 // Header carousel animation: End
 //------------------------------------------------------------------------------------------------
 
@@ -363,7 +364,7 @@ const inlineController = initEnquiryForm(
 // Project Card Section: Start
 const container = document.getElementById("projects-container");
 
-projects.map((project, index) => {
+if (container) { projects.map((project, index) => {
 
     // Duplicate first image for infinite loop
     const images = [
@@ -483,7 +484,7 @@ projects.map((project, index) => {
     </div>
 
 `;
-});
+}); }
 
 // Open Popup
 const dynamicEnquireButtons = document.querySelectorAll(".enquire-btn");
@@ -492,7 +493,15 @@ dynamicEnquireButtons.forEach((btn) => {
 
     btn.addEventListener("click", () => {
 
-        const project = btn.dataset.project;
+        let project = btn.dataset.project;
+
+        // Auto-detect project from the page filename when no data-project attribute
+        if (!project) {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes("miami")) project = "Miami";
+            else if (path.includes("montreal")) project = "Montreal";
+            else if (path.includes("boston")) project = "Boston";
+        }
 
         enquiryModal.classList.remove("hidden");
         enquiryModal.classList.add("flex");

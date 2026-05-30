@@ -2,22 +2,30 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Font -->
+    <title>Miami Residences</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
-    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/miami.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Red+Hat+Display:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Custome CSS -->
-    <link rel="stylesheet" href="/css/index.css">
-    <title>SS-Prime</title>
 </head>
 
 <body>
@@ -28,7 +36,7 @@
         <div class="w-full flex justify-between items-center px-4 md:px-8 blue-30">
 
             <!-- Logo -->
-            <img src="images/home-section/site-logo.webp" alt="logo" class=" w-48 h-18  object-cover">
+            <img src="/images/home-section/site-logo.webp" alt="logo" class=" w-48 h-18  object-cover">
 
             <!-- DESKTOP MENU -->
 
@@ -280,253 +288,379 @@
 
     </nav>
 
-    <!-- Carousel -->
-    <div class="w- h-[30rem]  overflow-hidden relative carousel-container">
-        <div id="slider" class="flex h-full"></div>
-    </div>
-    </div>
 
-    <!-- Introduction: Start -->
-    <section
-        class="py-24 px-6 md:px-16 bg-gradient-to-br from-[#f6f5f2] via-[#d6dac8] to-[#9ca986] relative overflow-hidden">
+    <!-- ====================================================== -->
+    <!-- HERO SECTION -->
+    <!-- ====================================================== -->
 
-        <!-- Luxury Background Blur -->
-        <div class="absolute top-0 left-0 w-96 h-96 bg-[#b08d57]/10 rounded-full blur-3xl"></div>
+    <section class="relative min-h-screen overflow-hidden bg-[#0d0d0d] py-10 md:py-0">
 
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#1f2937]/5 rounded-full blur-3xl"></div>
+        <!-- Background -->
+        <img src="/images/header-slider/boston.webp" alt=""
+            class="hero-image absolute inset-0 w-full h-full object-cover opacity-60">
 
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-20 items-center relative z-10">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/55"></div>
 
-            <!-- Left Content -->
-            <div>
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 min-h-screen flex items-center">
 
-                <p class="font-semibold uppercase tracking-[0.35rem] text-sm text-[#b08d57] mb-5">
-                    Pride World City
-                </p>
+            <div class="grid lg:grid-cols-2 gap-5 md:gap-16 items-center w-full">
 
-                <h1 class="text-4xl md:text-6xl leading-tight font-semibold text-[#1f2937] mb-8">
+                <!-- Left -->
+                <div class="text-white">
 
-                    A Visionary Township Crafted For
-                    <span class="text-[#b08d57]">
-                        Luxury Living
-                    </span>
+                    <p class="hero-tagline uppercase tracking-[0.35rem] text-sm text-white/60 mb-5">
 
-                </h1>
+                        Premium Residences
 
-                <p class="text-neutral-600 text-lg leading-8 mb-10 max-w-2xl">
+                    </p>
 
-                    Spread across 400+ acres, Pride World City brings together
-                    premium residences, retail avenues, lifestyle clubs and SEZs
-                    in one thoughtfully planned destination — perfectly connected
-                    to Pune Airport, Koregaon Park & Viman Nagar.
+                    <h1 class="hero-title text-5xl md:text-8xl font-semibold leading-none mb-8">
 
-                </p>
+                        Miami
+                        <br>
+                        Residences
 
-                <!-- Highlights -->
-                <div class="grid grid-cols-2  gap-2 md:gap-6">
+                    </h1>
 
-                    <!-- Box-1 -->
-                    <div
-                        class="group bg-white/80 backdrop-blur-xl p-3 md:p-6 rounded-[1rem] md:rounded-[2rem] border border-white/40 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                    <p class="hero-description text-lg text-neutral-300 leading-8 max-w-xl">
 
-                        <div class="flex items-center gap-2 md:gap-5">
-                            <div
-                                class="w-10 h-10 rounded-lg bg-[#b08d57]/10 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                        Luxury apartments designed with spacious layouts,
+                        modern interiors and elevated lifestyle amenities.
 
-                                <!-- Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="#b08d57" class="w-7 h-7">
+                    </p>
 
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 21h18M5 21V7l7-4 7 4v14" />
+                    <!-- Buttons -->
+                    <div class="hero-buttons flex md:flex-wrap gap-5 mt-10">
 
-                                </svg>
+                        <button
+                            class="enquire-btn primary-btn px-4 md:px-8 md:py-4 bg-white text-black rounded-full font-medium">
 
-                            </div>
+                            Enquire Now
 
-                            <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                400+
-                            </h4>
-                        </div>
+                        </button>
 
-                        <p class="text-sm text-neutral-500 mt-2">
-                            Acres Township
-                        </p>
+                        <button
+                            class="secondary-btn px-4 py-2 md:px-8 md:py-4 bg-green-800 border border-white/20 rounded-full">
 
-                    </div>
+                            Download Brochure
 
-                    <!-- Box-2 -->
-                    <div
-                        class="group bg-white/80 backdrop-blur-xl p-3 md:p-6 rounded-[1rem] md:rounded-[2rem] border border-white/40 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-
-                        <div class="flex items-center gap-2 md:gap-5">
-                            <div
-                                class="w-10 h-10 rounded-lg bg-[#b08d57]/10 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-
-                                <!-- Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="#b08d57" class="w-6 h-6 md:w-7 md:h-7">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
-
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-
-                                </svg>
-
-                            </div>
-
-                            <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                40+
-                            </h4>
-                        </div>
-
-                        <p class="text-sm text-neutral-500 mt-2">
-                            Lifestyle Amenities
-                        </p>
-
-                    </div>
-
-                    <!-- Box-3 -->
-                    <div
-                        class="group bg-white/80 backdrop-blur-xl p-3 md:p-6 rounded-[1rem] md:rounded-[2rem] border border-white/40 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-
-                        <div class="flex items-center gap-2 md:gap-5">
-                            <div
-                                class="w-10 h-10 rounded-lg bg-[#b08d57]/10 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-
-                                <!-- Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="#b08d57" class="w-6 h-6 md:w-7 md:h-7">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M8.25 6.75h7.5M8.25 12h7.5m-7.5 5.25h7.5" />
-
-                                </svg>
-                            </div>
-
-                            <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                3
-                            </h4>
-                        </div>
-
-                        <p class="text-sm text-neutral-500 mt-2">
-                            Premium Clusters
-                        </p>
-
-                    </div>
-
-                    <!-- Box-4 -->
-                    <div
-                        class="group bg-white/80 backdrop-blur-xl p-3 md:p-6 rounded-[1rem] md:rounded-[2rem] border border-white/40 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-
-                        <div class="flex items-center gap-2 md:gap-5">
-                            <div
-                                class="w-10 h-10 rounded-lg bg-[#b08d57]/10 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-
-                                <!-- Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="#b08d57" class="w-6 h-6 md:w-7 md:h-7">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 2.25c-4.97 0-9 4.03-9 9 0 6.75 9 10.5 9 10.5s9-3.75 9-10.5c0-4.97-4.03-9-9-9z" />
-
-                                    <circle cx="12" cy="11.25" r="2.25" />
-                                </svg>
-
-                            </div>
-
-                            <h4 class=" text-3xl md:text-4xl font-semibold text-[#1f2937]">
-                                Prime
-                            </h4>
-                        </div>
-
-                        <p class="text-sm text-neutral-500 mt-2">
-                            Connected Location
-                        </p>
+                        </button>
 
                     </div>
 
                 </div>
-            </div>
-            <!-- Introduction: End -->
 
-            <!-- Right Image -->
-            <div class="relative mt-14 lg:mt-0 group">
-
-                <img src="images/home-section/intro.webp" alt="Pride World City"
-                    class="w-full h-[45rem] object-cover shadow-xl rounded-3xl">
-
-                <!-- Floating Card -->
+                <!-- Right Card -->
                 <div
-                    class="absolute bottom-6 md:left-6 bg-white/90 backdrop-blur-md m-3 p-4 md:p-6 rounded-xl md:rounded-3xl shadow-lg md:max-w-xs">
+                    class="hero-card bg-white/10 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 text-white">
 
-                    <p class="text-sm uppercase tracking-[0.2rem] text-neutral-500 mb-3">
-                        Featured Township
-                    </p>
+                    <div class="grid grid-cols-2 gap-8">
 
-                    <h3 class="text-lg md:text-2xl font-semibold text-neutral-900 mb-1 md:mb-3">
-                        A True City Within A City
-                    </h3>
+                        <div>
 
-                    <p class="max-sm:text-sm text-neutral-600 md:leading-7 ">
-                        Designed with sophistication, comfort and seamless urban
-                        convenience at every step.
+                            <p class="text-white/60 text-sm mb-2">
+                                Configuration
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                2 & 3 BHK
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Starting Price
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                ₹ 85L
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Possession
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                2028
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-white/60 text-sm mb-2">
+                                Amenities
+                            </p>
+
+                            <h3 class="text-3xl font-semibold">
+                                40+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="w-full h-[1px] bg-white/10 my-8"></div>
+
+                    <p class="text-neutral-300 leading-7">
+
+                        Experience premium living with landscaped gardens,
+                        clubhouse, fitness spaces and elegant lifestyle amenities.
+
                     </p>
 
                 </div>
 
             </div>
+
         </div>
 
     </section>
 
+    <!-- ====================================================== -->
+    <!-- ABOUT SECTION -->
+    <!-- ====================================================== -->
 
-    <!-- Luxury Separator Section -->
-    <section
-        class="relative py-5 px-6 md:px-16 overflow-hidden bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a]">
+    <section class="py-28 px-6 md:px-16 bg-white">
 
-        <!-- Background Glow -->
-        <div class="absolute top-0 left-0 w-[30rem] h-[30rem] bg-[#d4af37]/10 rounded-full blur-3xl">
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+                <!-- Images -->
+                <div class="grid grid-cols-2 gap-5">
+
+                    <img src="images/projects/miami/gallery-1.webp" alt=""
+                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] mt-14">
+
+                    <img src="images/projects/miami/gallery-2.webp" alt=""
+                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-3.webp" alt=""
+                        class="about-image w-full h-[28rem] object-cover rounded-[2rem]">
+
+                    <img src="images/projects/miami/gallery-4.webp" alt=""
+                        class="about-image w-full h-[20rem] object-cover rounded-[2rem] -mt-14">
+
+                </div>
+
+                <!-- Content -->
+                <div>
+
+                    <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+
+                        About The Project
+
+                    </p>
+
+                    <h2 class="text-4xl md:text-6xl leading-tight font-semibold text-[#111827] mb-8">
+
+                        Modern Homes Crafted
+                        For Everyday Comfort
+
+                    </h2>
+
+                    <p class="text-lg text-neutral-600 leading-8 mb-10">
+
+                        Miami Residences combines thoughtful architecture,
+                        elegant interiors and premium amenities to create
+                        a balanced urban lifestyle experience.
+
+                    </p>
+
+                    <!-- Features -->
+                    <div class="space-y-8">
+
+                        <!-- Item -->
+                        <div class="flex gap-5">
+
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
+
+                                ✓
+
+                            </div>
+
+                            <div>
+
+                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
+
+                                    Spacious Layouts
+
+                                </h3>
+
+                                <p class="text-neutral-600 leading-7">
+
+                                    Large living spaces with natural light
+                                    and smart floor planning.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Item -->
+                        <div class="flex gap-5">
+
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl shrink-0">
+
+                                ✓
+
+                            </div>
+
+                            <div>
+
+                                <h3 class="text-2xl font-semibold text-[#111827] mb-2">
+
+                                    Premium Amenities
+
+                                </h3>
+
+                                <p class="text-neutral-600 leading-7">
+
+                                    Swimming pool, clubhouse, landscaped
+                                    gardens and fitness zones.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="absolute bottom-0 right-0 w-[25rem] h-[25rem] bg-white/5 rounded-full blur-3xl">
-        </div>
+    </section>
 
-        <!-- Grid -->
-        <div class="max-w-7xl mx-auto gap-16 items-center relative z-10">
+    <!-- ====================================================== -->
+    <!-- VIDEO SECTION -->
+    <!-- ====================================================== -->
 
-            <!-- Left Content -->
-            <div class="text-center ">
+    <section class="py-28 px-6 md:px-16 bg-[#f5f5f5]">
 
-                <p class="uppercase tracking-[0.45rem] text-xl text-[#d4af37] mb-5 font-medium">
+        <div class="max-w-7xl mx-auto">
 
-                    Crafted For Modern Living
+            <!-- Heading -->
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
 
-                </p>
+                <div>
 
-                <h2 class="text-4xl md:text-6xl font-semibold leading-tight text-white mb-8">
+                    <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
 
-                    Elevating Everyday
+                        Project Walkthrough
 
-                    <span
-                        class="bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] bg-clip-text text-transparent">
+                    </p>
 
-                        Luxury Experiences
+                    <h2 class="text-4xl md:text-6xl font-semibold text-[#111827] leading-tight">
 
-                    </span>
+                        Explore The Experience
 
-                </h2>
+                    </h2>
 
-                <p class="text-neutral-300 text-lg leading-8">
+                </div>
 
-                    Every residence is thoughtfully designed to blend
-                    sophistication, comfort and timeless architecture &
-                    creating spaces where elegance meets effortless living.
+                <p class="text-neutral-600 leading-8 max-w-xl">
+
+                    Discover the architecture, interiors and lifestyle
+                    through our cinematic project walkthrough.
 
                 </p>
 
             </div>
+
+            <!-- Video -->
+            <div class="overflow-hidden rounded-[2rem] relative aspect-video w-full">
+                <iframe class="w-full h-full object-cover"
+                    src="https://www.youtube.com/embed/gu4zTzPKYC4?autoplay=1&mute=1&loop=1&playlist=gu4zTzPKYC4&controls=0&showinfo=0&rel=0&modestbranding=1"
+                    allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- GALLERY -->
+    <!-- ====================================================== -->
+
+    <section class="py-28 px-6 md:px-16 bg-white">
+
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-20">
+
+                <p class="uppercase tracking-[0.35rem] text-sm text-neutral-400 mb-5">
+
+                    Gallery
+
+                </p>
+
+                <h2 class="text-4xl md:text-6xl font-semibold text-[#111827]">
+
+                    Project Highlights
+
+                </h2>
+
+            </div>
+
+            <!-- Masonry -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+                <div class="gallery-image rounded-[2rem]">
+
+                    <img src="/images/boston/montreal.webp" class="rounded-[2rem] w-full">
+
+                </div>
+
+            </div>
+
         </div>
 
     </section>
@@ -658,220 +792,6 @@
     </div>
     <!-- Pop Overlay:End -->
 
-    <!-- Project Section: Start -->
-    <section
-        class="py-24 px-6 md:px-16 bg-gradient-to-br from-[#f4f1ea] via-[#e8dcc8] to-[#d4c1a3] relative overflow-hidden">
-
-        <!-- Premium Gold Glow -->
-        <div class="absolute top-0 left-0 w-[30rem] h-[30rem] bg-[#c8a96b]/20 rounded-full blur-3xl">
-        </div>
-
-        <!-- Luxury Dark Blur -->
-        <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-[#1f2937]/10 rounded-full blur-3xl">
-        </div>
-
-        <!-- Soft Center Glow -->
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] bg-white/20 rounded-full blur-3xl">
-        </div>
-
-        <!-- Heading -->
-        <div class="text-center mb-16 relative z-10">
-
-            <p class="uppercase tracking-[0.45rem] text-sm text-[#b08d57] mb-4 font-semibold">
-
-                Featured Projects
-
-            </p>
-
-            <h1 class="text-4xl md:text-6xl font-semibold text-[#1f2937] leading-tight">
-
-                Explore Premium
-
-                <span class="bg-gradient-to-r from-[#b08d57] via-[#d4af37] to-[#8f6b32] bg-clip-text text-transparent">
-
-                    Living Spaces
-
-                </span>
-
-            </h1>
-
-            <p class="mt-6 text-neutral-700 max-w-2xl mx-auto leading-8 text-lg">
-
-                Discover thoughtfully designed residences crafted with
-                sophistication, elegance and timeless luxury living.
-
-            </p>
-
-        </div>
-
-        <!-- Grid -->
-        <div id="projects-container" class="grid md:grid-cols-2 xl:grid-cols-3 gap-10 max-w-7xl mx-auto relative z-10">
-        </div>
-
-    </section>
-    <!-- Project Section: End -->
-
-    <!-- Inline Enquiry Section: Start -->
-    <section
-        class="py-20 px-6 md:px-16 bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a] relative overflow-hidden">
-
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-[25rem] h-[25rem] bg-[#d4af37]/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-white/5 rounded-full blur-3xl"></div>
-
-        <div class="max-w-4xl mx-auto relative z-10">
-            <!-- Heading -->
-            <div class="text-center mb-12">
-                <p class="uppercase tracking-[0.45rem] text-sm text-[#d4af37] mb-4 font-semibold">
-                    Get In Touch
-                </p>
-                <h2 class="text-4xl md:text-5xl font-semibold text-white leading-tight">
-                    Request Call Back & <span
-                        class="bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] bg-clip-text text-transparent">Pricing
-                        Details</span>
-                </h2>
-                <p class="mt-4 text-neutral-300 max-w-xl mx-auto leading-7">
-                    Submit your details below and our luxury property consultant will get in touch with you in 24 hours.
-                </p>
-            </div>
-
-            <!-- Form Container (Glassmorphism) -->
-            <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-6 md:p-10 shadow-2xl">
-                <form id="inlineEnquiryForm" class="grid md:grid-cols-2 gap-6">
-
-                    <!-- Name -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Full
-                            Name</label>
-                        <input type="text" placeholder="Enter your name" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
-                    </div>
-
-                    <!-- Number -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Contact
-                            Number</label>
-                        <input type="number" placeholder="Enter your number" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
-                    </div>
-
-                    <!-- Email -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Email
-                            Address</label>
-                        <input type="email" placeholder="Enter your email" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
-                    </div>
-
-                    <!-- City -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Your
-                            City</label>
-                        <input type="text" placeholder="Enter your city" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-white outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] text-xs md:text-base placeholder:text-xs md:placeholder:text-base transition-all duration-300">
-                    </div>
-
-                    <!-- Project -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Select
-                            Project</label>
-                        <select id="inlineProjectSelect" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-neutral-300 outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] appearance-none bg-white cursor-pointer text-xs md:text-base transition-all duration-300">
-                            <option value="" disabled selected class="bg-[#1f2937] text-white">Choose project</option>
-                            <option value="Miami" class="bg-[#1f2937] text-white">Miami</option>
-                            <option value="Montreal" class="bg-[#1f2937] text-white">Montreal</option>
-                            <option value="Boston" class="bg-[#1f2937] text-white">Boston</option>
-                        </select>
-                    </div>
-
-                    <!-- Flat Type -->
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">Select
-                            Flat Type</label>
-                        <select id="inlineFlatSelect" required
-                            class="w-full h-14 px-2 md:px-5 rounded-2xl border border-white/10 bg-white/5 text-neutral-300 outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] appearance-none bg-white cursor-pointer text-xs md:text-base transition-all duration-300">
-                            <option value="" disabled selected class="bg-[#1f2937] text-white">Choose flat
-                            </option>
-                        </select>
-                    </div>
-
-                    <!-- Pricing Box -->
-                    <div id="inlinePricingBox"
-                        class="hidden md:col-span-2 bg-white/5 rounded-[2rem] p-6 border border-white/10">
-                        <p class="text-sm uppercase tracking-[0.25rem] text-[#d4af37] mb-3">
-                            Pricing & Availability
-                        </p>
-                        <h3 id="inlineFlatPrice" class="text-3xl font-semibold text-white">
-                            ₹ 85 Lakhs
-                        </h3>
-                        <p id="inlineFlatAvailability" class="text-green-400 mt-2 font-medium">
-                            Available
-                        </p>
-                    </div>
-
-                    <!-- Button -->
-                    <button type="submit"
-                        class="md:col-span-2 h-14 rounded-full bg-gradient-to-r from-[#d4af37] via-[#f5d68a] to-[#b08d57] text-black font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[#d4af37]/20">
-                        Submit Enquiry
-                    </button>
-
-                </form>
-            </div>
-        </div>
-    </section>
-    <!-- Inline Enquiry Section: End -->
-
-    <!-- Sticky CTA Buttons -->
-    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
-
-        <div
-            class="flex items-center gap-3 bg-white/90 backdrop-blur-xl shadow-2xl px-3 py-3 rounded-full border border-neutral-200">
-
-            <!-- WhatsApp -->
-            <!-- WhatsApp -->
-           
-
-            <!-- Call -->
-            <a href="tel:+919999999999"
-                class="flex items-center gap-2 px-5 py-3 rounded-full bg-black text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="w-5 h-5">
-
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.1 1.05a11.04 11.04 0 005.52 5.52l1.05-2.1a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V5z" />
-
-                </svg>
-
-                <span class="hidden md:block">
-                    Call
-                </span>
-
-            </a>
-
-            <!-- Enquire -->
-            <button
-                class="enquire-btn flex items-center gap-2 px-5 py-3 rounded-full border border-neutral-300 bg-white hover:bg-black hover:text-white hover:scale-105 hover:shadow-xl transition-all duration-300">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="w-5 h-5">
-
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 10h8M8 14h5m-9 7h16a2 2 0 002-2V5a2 2 0 00-2-2H4a2 2 0 00-2 2v14a2 2 0 002 2z" />
-
-                </svg>
-
-                <span class="hidden md:block">
-                    Enquire
-                </span>
-
-            </button>
-
-        </div>
-
-    </div>
-
     <!-- Footer: Start -->
     <footer class="bg-[#0f1720] text-white pt-20 pb-10 px-6 md:px-16 relative overflow-hidden">
 
@@ -886,7 +806,7 @@
                 <!-- Brand -->
                 <div class="md:-mt-10">
 
-                    <img src="images/home-section/site-logo.webp" alt="SS Prime Logo"
+                    <img src="/images/home-section/site-logo.webp" alt="SS Prime Logo"
                         class="w-60 h-30 object-cover mb-6 hover:scale-105 transition-all duration-500">
 
                     <p class="text-neutral-400 leading-8 text-sm">
@@ -1052,10 +972,11 @@
     </footer>
     <!-- Footer:End -->
 
+
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
 
-    <script src="index.js" type="module"></script>
+    <script src="../index.js" type="module"></script>
 </body>
 
 </html>
