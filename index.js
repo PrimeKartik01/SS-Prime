@@ -108,7 +108,7 @@ if (slider) { allSlides.map((slide) => {
             <!-- Background Image -->
             <img 
                 src="${slide.image}" 
-                class="w-full h-full object-cover"
+                class="w-full h-full object-fill"
                 alt=""
             >
 
@@ -116,13 +116,13 @@ if (slider) { allSlides.map((slide) => {
             <div class="absolute inset-0 bg-black/55"></div>
 
             <!-- Content -->
-            <div class="absolute bottom-8 md:bottom-14 left-6 md:left-12 text-white z-10 max-w-lg">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-10  text-center">
 
-                <p class="uppercase tracking-[0.3rem] font-semibold text-xs md:text-sm mb-3 opacity-80">
+                <p class="uppercase tracking-[0.3rem] font-semibold text-xs md:text-2xl mb-3 opacity-80">
                     Prime world City
                 </p>
 
-                <h1 class="text-3xl md:text-6xl leading-tight font-semibold mb-4 animate-content">
+                <h1 class="text-3xl md:text-8xl leading-tight font-semibold mb-4 animate-content">
                     ${slide.title}
                 </h1>
 
@@ -374,10 +374,10 @@ if (container) { projects.map((project, index) => {
 
     container.innerHTML += `
 
-    <div class="bg-white/70 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/40 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 group">
+    <div class="bg-white/70 backdrop-blur-xl flex flex-col md:flex-row rounded-[1.5rem] overflow-hidden border border-white/40 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 group">
 
         <!-- Carousel -->
-        <div class="relative overflow-hidden h-72">
+        <div class="relative overflow-hidden flex w-1/2">
 
             <!-- Slider -->
             <div id="slider-${index}"
@@ -473,7 +473,7 @@ if (container) { projects.map((project, index) => {
                 <a href="${project.link}"
                     class="flex-1 py-3 rounded-full border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
 
-                    View Project
+                    Download Brochure
 
                 </a>
 
@@ -614,5 +614,225 @@ sliders.forEach((slider, index) => {
 
 // Project Card Section: End
 //------------------------------------------------------------------------------------------------
+
+
+
+const LOCATION_DATA = {
+
+    baseLocation: {
+      name: "Pride World City",
+      lat: 18.6278,
+      lng: 73.9320
+    },
+
+    locations: [
+
+      { name: "Airport",       lat: 18.5822, lng: 73.9197 },
+      { name: "Kalyani Nagar", lat: 18.5484, lng: 73.9007 },
+      { name: "Koregaon Park", lat: 18.5362, lng: 73.8930 },
+      { name: "Kharadi",       lat: 18.5519, lng: 73.9506 },
+      { name: "Wagholi",       lat: 18.5793, lng: 73.9781 },
+      { name: "EON IT Park",   lat: 18.5603, lng: 73.9397 },
+      { name: "Yerwada",       lat: 18.5514, lng: 73.8786 },
+      { name: "Bhosari MIDC",  lat: 18.6298, lng: 73.8403 },
+      { name: "Moshi",         lat: 18.6794, lng: 73.8582 },
+      { name: "Alandi",        lat: 18.6775, lng: 73.8987 },
+      { name: "Chakan",        lat: 18.7606, lng: 73.8636 },
+      { name: "Hinjewadi",     lat: 18.5910, lng: 73.7389 }
+
+    ]
+
+  };
+
+
+
+  /*
+  =====================================
+  GLOBAL VARIABLES
+  =====================================
+  */
+
+  let map;
+  let currentRouteLayer = null;
+  let activeBtn = null;
+
+
+
+  /*
+  =====================================
+  INIT LEAFLET MAP
+  =====================================
+  */
+
+  function initMap() {
+
+    const base = LOCATION_DATA.baseLocation;
+
+    map = L.map("map").setView([base.lat, base.lng], 11);
+
+    // OpenStreetMap tiles — FREE, no key needed
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+      }
+    ).addTo(map);
+
+    // Base marker (Pride World City) — permanent label always visible
+    L.marker([base.lat, base.lng])
+      .addTo(map)
+      .bindTooltip("📍 Pride World City", {
+        permanent: true,
+        direction: "top",
+        className: "base-label",
+        offset: [0, -10]
+      })
+      .openTooltip();
+
+    // Render buttons
+    renderLocations();
+
+    // Default: show Airport route
+    showRoute(LOCATION_DATA.locations[0]);
+
+  }
+
+
+
+  /*
+  =====================================
+  RENDER LOCATION BUTTONS
+  =====================================
+  */
+
+  function renderLocations() {
+
+    const container = document.getElementById("locationContainer");
+
+    LOCATION_DATA.locations.forEach((location, index) => {
+
+      const btn = document.createElement("button");
+
+      btn.id = "btn-" + index;
+
+      btn.className =
+        "location-btn w-full flex items-center justify-between bg-gray-400 hover:bg-black hover:text-white rounded-2xl p-4";
+
+      btn.innerHTML = `
+        <div class="flex items-center gap-3">
+          <div class="w-5 h-5 rounded-full border flex items-center justify-center">
+            ➜
+          </div>
+          <span class="text-xs font-medium">${location.name}</span>
+        </div>
+      `;
+
+      btn.addEventListener("click", () => {
+
+        // Remove active from previous
+        if (activeBtn) activeBtn.classList.remove("active");
+
+        // Set active
+        btn.classList.add("active");
+        activeBtn = btn;
+
+        showRoute(location);
+
+      });
+
+      container.appendChild(btn);
+
+    });
+
+  }
+
+
+
+  /*
+  =====================================
+  SHOW ROUTE USING OSRM (FREE)
+  =====================================
+  */
+
+  function showRoute(destination) {
+
+    const base = LOCATION_DATA.baseLocation;
+
+    // OSRM free routing API — no key needed
+    const url =
+      `https://router.project-osrm.org/route/v1/driving/` +
+      `${base.lng},${base.lat};${destination.lng},${destination.lat}` +
+      `?overview=full&geometries=geojson`;
+
+    // Update "To:" label immediately
+    document.getElementById("selectedLocation").innerText = destination.name;
+    document.getElementById("distanceText").innerText = "Loading...";
+    document.getElementById("durationText").innerText = "";
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+
+        if (data.code !== "Ok" || !data.routes.length) {
+          document.getElementById("distanceText").innerText = "Error";
+          return;
+        }
+
+        const route = data.routes[0];
+
+        // Distance in km
+        const distanceKm = (route.distance / 1000).toFixed(1);
+
+        // Duration in minutes
+        const durationMin = Math.round(route.duration / 60);
+
+        // Update UI
+        document.getElementById("distanceText").innerText =
+          distanceKm + " KM";
+
+        document.getElementById("durationText").innerText =
+          durationMin + " Minutes";
+
+        // Remove previous route from map
+        if (currentRouteLayer) {
+          map.removeLayer(currentRouteLayer);
+        }
+
+        // Draw new route as polyline
+        const coords = route.geometry.coordinates.map(
+          c => [c[1], c[0]]   // OSRM gives [lng, lat], Leaflet needs [lat, lng]
+        );
+
+        currentRouteLayer = L.polyline(coords, {
+          color: "#000000",
+          weight: 5,
+          opacity: 0.8
+        }).addTo(map);
+
+        // Add destination marker
+        L.marker([destination.lat, destination.lng])
+          .addTo(map)
+          .bindPopup(`<b>📍 ${destination.name}</b>`)
+          .openPopup();
+
+        // Fit map to show full route
+        map.fitBounds(currentRouteLayer.getBounds(), { padding: [40, 40] });
+
+      })
+      .catch(() => {
+        document.getElementById("distanceText").innerText = "No route";
+        document.getElementById("durationText").innerText =
+          "Check internet connection";
+      });
+
+  }
+
+
+
+  // Start the map
+  initMap();
+// location end
 
 

@@ -17,7 +17,11 @@
 
     <!-- Custome CSS -->
     <link rel="stylesheet" href="/css/index.css">
-    <title>SS-Prime</title>
+
+    <!-- Mapbox -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <title>Prime World City</title>
 </head>
 
 <body>
@@ -25,16 +29,16 @@
     <!-- NAVBAR -->
     <nav class="sticky top-0 z-50">
 
-        <div class="w-full flex justify-between items-center px-4 md:px-8 blue-30">
+        <div class="w-full flex justify-between items-center px-4 md:px-8 bg-white">
 
             <!-- Logo -->
             <img src="images/home-section/site-logo.webp" alt="logo" class=" w-48 h-18  object-cover">
 
             <!-- DESKTOP MENU -->
 
-            <ul class="hidden md:flex items-center gap-10 text-white relative">
+            <ul class="hidden md:flex items-center gap-10 text-black font-semibold relative">
 
-                <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
+                <li class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
                     Home
                 </li>
 
@@ -42,7 +46,7 @@
                 <li class="relative group cursor-pointer">
 
                     <div
-                        class="group flex items-center gap-2 hover:text-neutral-300 transition-all duration-900 cursor-pointer">
+                        class="group flex items-center gap-2 hover:text-blue-500 transition-all duration-900 cursor-pointer">
 
                         Projects
 
@@ -127,15 +131,19 @@
 
                 </li>
 
-                <li class="hover:text-neutral-300 transition-all duration-300 cursor-pointer">
+                <li class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
                     About
+                </li>
+
+                <li class="hover:text-blue-500 transition-all duration-300 cursor-pointer">
+                    Location
                 </li>
 
             </ul>
 
             <!-- Desktop Button -->
             <button
-                class="enquire-btn hidden md:block rounded-full px-7 py-2 bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer">
+                class="enquire-btn hidden md:block rounded-full px-7 py-2 bg-gray-600 text-white font-semibold hover:scale-105 transition-all duration-300 cursor-pointer">
 
                 Contact Now
 
@@ -281,7 +289,7 @@
     </nav>
 
     <!-- Carousel -->
-    <div class="w- h-[30rem]  overflow-hidden relative carousel-container">
+    <div class="w-full h-[43rem]  overflow-hidden relative carousel-container">
         <div id="slider" class="flex h-full"></div>
     </div>
     </div>
@@ -481,7 +489,6 @@
 
     </section>
 
-
     <!-- Luxury Separator Section -->
     <section
         class="relative py-5 px-6 md:px-16 overflow-hidden bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#0f172a]">
@@ -660,7 +667,7 @@
 
     <!-- Project Section: Start -->
     <section
-        class="py-24 px-6 md:px-16 bg-gradient-to-br from-[#f4f1ea] via-[#e8dcc8] to-[#d4c1a3] relative overflow-hidden">
+        class="bg-gradient-to-br from-[#f4f1ea] via-[#e8dcc8] to-[#d4c1a3] relative overflow-hidden py-20 px-5 md:px-10">
 
         <!-- Premium Gold Glow -->
         <div class="absolute top-0 left-0 w-[30rem] h-[30rem] bg-[#c8a96b]/20 rounded-full blur-3xl">
@@ -676,7 +683,7 @@
         </div>
 
         <!-- Heading -->
-        <div class="text-center mb-16 relative z-10">
+        <div class="text-center relative z-10 py-5 ">
 
             <p class="uppercase tracking-[0.45rem] text-sm text-[#b08d57] mb-4 font-semibold">
 
@@ -706,11 +713,109 @@
         </div>
 
         <!-- Grid -->
-        <div id="projects-container" class="grid md:grid-cols-2 xl:grid-cols-3 gap-10 max-w-7xl mx-auto relative z-10">
+        <div id="projects-container" class="grid gap-5 relative z-10">
         </div>
 
     </section>
     <!-- Project Section: End -->
+
+     <!-- Map:start -->
+    <section class="py-16 px-5 bg-gray-200">
+
+        <div class="mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-12">
+
+                <h1 class="text-5xl font-bold text-gray-900">
+                    Location Advantages
+                </h1>
+
+                <p class="text-gray-500 mt-4">
+                    Click any location to see route &amp; distance
+                </p>
+
+            </div>
+
+            <div class="flex flex-col-reverse lg:flex-row gap-8">
+
+                <!-- LEFT SIDE -->
+                <div class="bg-white rounded-3xl shadow-2xl p-6 flex flex-col gap-4">
+
+                    <!-- Base Location -->
+                    <div class="bg-gray-700 text-white p-5 rounded-2xl">
+
+                        <h2 class="text-2xl font-bold">
+                            📍 Pride World City
+                        </h2>
+
+                        <p class="text-gray-300 mt-3 text-sm leading-7">
+                            Charholi Budruk, adjacent to DY Patil Knowledge City Road,
+                            Annex, Dhanori, Pune, Maharashtra 412105
+                        </p>
+
+                    </div>
+
+                    <!-- Distance -->
+                    <div class="bg-gray-100 rounded-2xl p-4">
+
+                        <h3 class="text-lg md:text-2xl font-bold text-gray-900">
+                            Distance Details
+                        </h3>
+
+                        <div class="grid grid-cols-2 gap-2">
+
+                            <h2 id="distanceText" class="text-md md:text-xl font-bold text-green-600">
+                                — KM
+                            </h2>
+
+                            <p id="durationText" class="text-md md:text-xl font-bold text-blue-600">
+                                — Minutes
+                            </p>
+
+                        </div>
+
+
+                        <div class=" space-y-3 flex gap-1">
+
+                            <p class="text-xs md:text-xl text-gray-600 w-full">
+                                From:
+                                <span class="font-bold">
+                                    Pride World City
+                                </span>
+                            </p>
+
+                            <p class="text-xs md:text-xl text-gray-600 w-full">
+                                To:
+                                <span id="selectedLocation" class="font-bold">
+                                    Airport
+                                </span>
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Dynamic Locations -->
+                    <div id="locationContainer" class=" grid grid-cols-2 gap-2"></div>
+
+                </div>
+
+                <!-- MAP -->
+                <div class="w-full h-full bg-white rounded-3xl shadow-2xl p-4">
+
+                    <div id="map"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Map:End -->
 
     <!-- Inline Enquiry Section: Start -->
     <section
@@ -830,7 +935,7 @@
 
             <!-- WhatsApp -->
             <!-- WhatsApp -->
-           
+
 
             <!-- Call -->
             <a href="tel:+919999999999"
@@ -1056,6 +1161,9 @@
     <div id="toastContainer" class="fixed top-5 right-5 z-[1000] flex flex-col gap-3 pointer-events-none"></div>
 
     <script src="index.js" type="module"></script>
+
+    <!-- LEAFLET JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 
 </html>

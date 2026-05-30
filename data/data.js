@@ -1,19 +1,19 @@
 // data.js
 export const slides = [
     {
-        image: "images/header-slider/pwc-montreal.webp",
+        image: "images/header-slider/pride-world-city-01.webp",
         title: "PWC Montreal",
         description:
             "Elegant homes designed for modern comfort and peaceful living."
     },
     {
-        image: "images/header-slider/boston.webp",
+        image: "images/header-slider/pride-world-city-02.webp",
         title: "Modern Apartments",
         description:
             "Beautiful spaces crafted with simplicity and sophistication."
     },
     {
-        image: "images/header-slider/miami.webp",
+        image: "images/header-slider/pride-world-city-03.webp",
         title: "Modern Apartments",
         description:
             "Beautiful spaces crafted with simplicity and sophistication."
