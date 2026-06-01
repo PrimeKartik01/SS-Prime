@@ -63,8 +63,8 @@ export const projects = [
             { img: "images/miami/miami-qr-01.webp", number: "P52100077670" },
             { img: "images/miami/miami-qr-02.webp", number: "PR1260002502081" }
         ],
-
-        link: "#"
+        
+        link: "brochure/miami.pdf",
     },
 
     {
@@ -109,7 +109,7 @@ export const projects = [
             "Premium Design"
         ],
 
-        link: "#"
+        link: "brochure/montreal.pdf",
     },
 
     {
@@ -150,8 +150,7 @@ export const projects = [
             "Double Balcony",
             "Skyline Views"
         ],
-
-        link: "#"
+        link: "brochure/boston.pdf",
     }
 ];
 

@@ -270,6 +270,14 @@ function enableEnquiryForms() {
     });
 }
 
+function setUserHasSubmitted() {
+    try { localStorage.setItem('hasSubmitted', '1'); } catch (e) { }
+}
+
+function isUserSubmitted() {
+    try { return localStorage.getItem('hasSubmitted') === '1'; } catch (e) { return false; }
+}
+
 function scheduleEnquiryLimitReset(data) {
     const remainingMs = ENQUIRY_SUBMISSION_WINDOW_MS - (Date.now() - data.start);
     if (remainingMs <= 0) {
@@ -448,6 +456,8 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
                 throw new Error(result.error || "Submission failed");
             }
 
+            localStorage.setItem("leadSubmitted", "true");
+
             showToast(
                 `Thank you, ${name}! Your enquiry for ${project} (${flat}) has been received.`
             );
@@ -460,6 +470,9 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
                     "error"
                 );
             }
+
+            // Mark that the user has submitted so they can download brochures
+            setUserHasSubmitted();
 
             form.reset();
             pBox.classList.add("hidden");
@@ -530,9 +543,37 @@ const inlineController = initEnquiryForm(
 );
 
 updateEnquiryLimitState();
+// ======================================
+// AUTO ENQUIRY POPUP
+// ======================================
 
+let autoPopupCount = 0;
+const MAX_AUTO_POPUPS = 2;
+
+function openEnquiryPopup() {
+
+    if (autoPopupCount >= MAX_AUTO_POPUPS) return;
+
+    if (localStorage.getItem("leadSubmitted")) return;
+
+    enquiryModal.classList.remove("hidden");
+    enquiryModal.classList.add("flex");
+
+    autoPopupCount++;
+}
+
+// First popup after 10 seconds
+setTimeout(() => {
+    openEnquiryPopup();
+}, 10000);
+
+// Second popup after 50 seconds
+setTimeout(() => {
+    openEnquiryPopup();
+}, 50000);
 // Form Logic: End
 //------------------------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------------------------
 // Project Card Section: Start
@@ -680,7 +721,9 @@ if (container) {
                 </button>
 
                 <a href="${project.link}"
-                    class="flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
+                    data-brochure="${project.link}"
+                    data-project="${project.name}"
+                    class="brochure-link flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
 
                     Download Brochure
 
@@ -731,6 +774,40 @@ dynamicEnquireButtons.forEach((btn) => {
 
     });
 
+});
+
+// Intercept brochure downloads: require a successful enquiry submission first
+const brochureLinks = document.querySelectorAll('.brochure-link');
+brochureLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+        const submitted = isUserSubmitted();
+        const href = (link.getAttribute('href') || link.dataset.brochure || '').trim();
+
+        if (submitted) {
+
+            e.preventDefault(); // <-- important
+
+            // User already submitted — allow download/navigation.
+            if (href) {
+                // If anchor has href, navigate programmatically to ensure it works when href was removed.
+                window.open(href, "_blank");
+            } else {
+                e.preventDefault();
+                showToast('Brochure not available.', 'error');
+            }
+            return;
+        }
+
+        // Not submitted: open enquiry modal and prevent default navigation
+        e.preventDefault();
+        const proj = link.dataset.project;
+        if (modalController && proj) modalController.setProject(proj);
+        if (enquiryModal) {
+            enquiryModal.classList.remove('hidden');
+            enquiryModal.classList.add('flex');
+        }
+        showToast('Please submit the enquiry to download the brochure.', 'error');
+    });
 });
 
 // Slider Logic
