@@ -109,9 +109,10 @@ const allSlides = [...slides, slides[0]];
 const slider = document.getElementById("slider");
 
 // Create Slides
-if (slider) { allSlides.map((slide) => {
+if (slider) {
+    allSlides.map((slide) => {
 
-    slider.innerHTML += `
+        slider.innerHTML += `
 
         <div class="relative min-w-full h-full overflow-hidden">
 
@@ -129,7 +130,7 @@ if (slider) { allSlides.map((slide) => {
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-10  text-center">
 
                 <p class="uppercase tracking-[0.3rem] font-semibold text-xs md:text-2xl mb-3 opacity-80">
-                    Prime world City
+                     ${slide.subtitle}
                 </p>
 
                 <h1 class="text-5xl md:text-8xl leading-tight font-semibold mb-4 animate-content">
@@ -149,7 +150,8 @@ if (slider) { allSlides.map((slide) => {
         </div>
 
     `;
-}); }
+    });
+}
 
 let current = 0;
 
@@ -192,12 +194,124 @@ if (slider) { setInterval(changeSlide, 4500); }
 //------------------------------------------------------------------------------------------------
 // Form Logic: Start
 
+const ENQUIRY_SUBMISSION_KEY = "enquirySubmissionData";
+const ENQUIRY_SUBMISSION_LIMIT = 5;
+const ENQUIRY_SUBMISSION_WINDOW_MS = 24 * 60 * 60; // 24 hours
+let enquiryLimitTimeout = null;
+
+function getEnquirySubmissionData() {
+    const raw = localStorage.getItem(ENQUIRY_SUBMISSION_KEY);
+    if (!raw) {
+        return { count: 0, start: 0 };
+    }
+
+    try {
+        const data = JSON.parse(raw);
+        return {
+            count: typeof data.count === "number" ? data.count : 0,
+            start: typeof data.start === "number" ? data.start : 0
+        };
+    } catch {
+        return { count: 0, start: 0 };
+    }
+}
+
+function setEnquirySubmissionData(data) {
+    localStorage.setItem(ENQUIRY_SUBMISSION_KEY, JSON.stringify(data));
+}
+
+function isEnquiryWindowExpired(data) {
+    return data.start === 0 || Date.now() - data.start >= ENQUIRY_SUBMISSION_WINDOW_MS;
+}
+
+function getEnquirySubmissionCount() {
+    const data = getEnquirySubmissionData();
+    if (isEnquiryWindowExpired(data)) {
+        return 0;
+    }
+    return data.count;
+}
+
+function incrementEnquirySubmissionCount() {
+    const data = getEnquirySubmissionData();
+
+    if (isEnquiryWindowExpired(data)) {
+        data.count = 1;
+        data.start = Date.now();
+    } else {
+        data.count += 1;
+    }
+
+    setEnquirySubmissionData(data);
+    return data.count;
+}
+
+function disableEnquiryForms() {
+    const forms = document.querySelectorAll("#modalEnquiryForm, #inlineEnquiryForm");
+    forms.forEach((form) => {
+        const elements = form.querySelectorAll("input, select, button[type='submit']");
+        elements.forEach((el) => {
+            el.disabled = true;
+        });
+    });
+}
+
+function enableEnquiryForms() {
+    if (enquiryLimitTimeout) {
+        clearTimeout(enquiryLimitTimeout);
+        enquiryLimitTimeout = null;
+    }
+    const forms = document.querySelectorAll("#modalEnquiryForm, #inlineEnquiryForm");
+    forms.forEach((form) => {
+        const elements = form.querySelectorAll("input, select, button[type='submit']");
+        elements.forEach((el) => {
+            el.disabled = false;
+        });
+    });
+}
+
+function scheduleEnquiryLimitReset(data) {
+    const remainingMs = ENQUIRY_SUBMISSION_WINDOW_MS - (Date.now() - data.start);
+    if (remainingMs <= 0) {
+        return;
+    }
+    if (enquiryLimitTimeout) {
+        clearTimeout(enquiryLimitTimeout);
+    }
+    enquiryLimitTimeout = setTimeout(() => {
+        updateEnquiryLimitState();
+    }, remainingMs + 50);
+}
+
+function updateEnquiryLimitState() {
+    const data = getEnquirySubmissionData();
+
+    if (isEnquiryWindowExpired(data)) {
+        setEnquirySubmissionData({ count: 0, start: 0 });
+        enableEnquiryForms();
+        return true;
+    }
+
+    if (data.count >= ENQUIRY_SUBMISSION_LIMIT) {
+        disableEnquiryForms();
+        scheduleEnquiryLimitReset(data);
+        showToast(
+            `You have reached the maximum of ${ENQUIRY_SUBMISSION_LIMIT} enquiries. Please try again after ${Math.ceil((ENQUIRY_SUBMISSION_WINDOW_MS - (Date.now() - data.start)) / 1000)} seconds.`,
+            "error"
+        );
+        return false;
+    }
+
+    enableEnquiryForms();
+    return true;
+}
+
 // Toast Notification Function
 function showToast(message, type = "success") {
     const toast = document.createElement("div");
     toast.className = `px-6 py-4 rounded-2xl shadow-2xl text-white font-medium flex items-center gap-3 translate-y-[-20px] opacity-0 transition-all duration-500 pointer-events-auto ${type === "success"
-            ? "bg-gradient-to-r from-[#1f2937] to-[#0f172a] border border-[#d4af37]/30 text-[#f5d68a]"
-            : "bg-gradient-to-r from-red-600 to-rose-700 border border-red-500/20 text-white"
+        ? "bg-gradient-to-r from-[#1f2937] to-[#0f172a] border border-[#d4af37]/30 text-[#f5d68a]"
+        : "bg-gradient-to-r from-red-600 to-rose-700 border border-red-500/20 text-white"
         }`;
 
     // Icon
@@ -280,8 +394,12 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
         populatePrice(projSelect.value);
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        if (!updateEnquiryLimitState()) {
+            return;
+        }
 
         const nameInput = form.querySelector('input[placeholder*="name"]');
         const numberInput = form.querySelector('input[placeholder*="number"]');
@@ -300,25 +418,67 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
             return;
         }
 
-        const flat = projectFlats[project][flatIndex].type;
+        const flat = projectFlats[project][flatIndex]?.type || "";
 
-        console.log(`Enquiry submitted from form #${formId}:`, { name, number, email, city, project, flat });
+        if (!flat) {
+            showToast("Please select a valid flat type.", "error");
+            return;
+        }
 
-        // Show luxury toast notification
-        showToast(`Thank you, ${name}! Your enquiry for ${project} (${flat}) has been received.`);
+        try {
+            const response = await fetch("/api/enquiry.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    source: formId,
+                    name,
+                    number,
+                    email,
+                    city,
+                    project,
+                    flat
+                })
+            });
 
-        // Reset form state
-        form.reset();
-        pBox.classList.add("hidden");
-        flatSel.innerHTML = '<option value="" disabled selected>Choose flat</option>';
+            const result = await response.json();
 
-        // If popup modal form, close modal
-        if (formId === "modalEnquiryForm") {
-            const modal = document.getElementById("enquiryModal");
-            if (modal) {
-                modal.classList.add("hidden");
-                modal.classList.remove("flex");
+            if (!result.success) {
+                throw new Error(result.error || "Submission failed");
             }
+
+            showToast(
+                `Thank you, ${name}! Your enquiry for ${project} (${flat}) has been received.`
+            );
+
+            const submissionCount = incrementEnquirySubmissionCount();
+            if (submissionCount >= ENQUIRY_SUBMISSION_LIMIT) {
+                disableEnquiryForms();
+                showToast(
+                    `You have reached the maximum of ${ENQUIRY_SUBMISSION_LIMIT} enquiries. Please contact us directly for more help.`,
+                    "error"
+                );
+            }
+
+            form.reset();
+            pBox.classList.add("hidden");
+            flatSel.innerHTML = '<option value="" disabled selected>Choose flat</option>';
+
+            if (formId === "modalEnquiryForm") {
+                const modal = document.getElementById("enquiryModal");
+                if (modal) {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
+                }
+            }
+        } catch (error) {
+            console.error(error);
+
+            showToast(
+                error.message || "Unable to submit enquiry.",
+                "error"
+            );
         }
     });
 
@@ -341,12 +501,14 @@ closeModal.addEventListener("click", () => {
 });
 
 // Close Popup on Outside Click
-enquiryModal.addEventListener("click", (e) => {
-    if (e.target === enquiryModal) {
-        enquiryModal.classList.add("hidden");
-        enquiryModal.classList.remove("flex");
-    }
-});
+if (enquiryModal) {
+    enquiryModal.addEventListener("click", (e) => {
+        if (e.target === enquiryModal) {
+            enquiryModal.classList.add("hidden");
+            enquiryModal.classList.remove("flex");
+        }
+    });
+}
 
 // Initialize Form Controllers
 const modalController = initEnquiryForm(
@@ -367,6 +529,8 @@ const inlineController = initEnquiryForm(
     "inlineFlatAvailability"
 );
 
+updateEnquiryLimitState();
+
 // Form Logic: End
 //------------------------------------------------------------------------------------------------
 
@@ -374,15 +538,16 @@ const inlineController = initEnquiryForm(
 // Project Card Section: Start
 const container = document.getElementById("projects-container");
 
-if (container) { projects.map((project, index) => {
+if (container) {
+    projects.map((project, index) => {
 
-    // Duplicate first image for infinite loop
-    const images = [
-        ...project.images,
-        project.images[0]
-    ];
+        // Duplicate first image for infinite loop
+        const images = [
+            ...project.images,
+            project.images[0]
+        ];
 
-    container.innerHTML += `
+        container.innerHTML += `
 
     <div id="${project.name.toLowerCase()}" class="scroll-mt-24 md:h-[35rem] bg-white/70 backdrop-blur-xl flex flex-col md:flex-row rounded-[1.5rem] overflow-hidden border border-white/40 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 group">
 
@@ -528,7 +693,8 @@ if (container) { projects.map((project, index) => {
     </div>
 
 `;
-}); }
+    });
+}
 
 // Open Popup
 const dynamicEnquireButtons = document.querySelectorAll(".enquire-btn");
@@ -664,51 +830,51 @@ sliders.forEach((slider, index) => {
 const LOCATION_DATA = {
 
     baseLocation: {
-      name: "Pride World City",
-      lat: 18.6278,
-      lng: 73.9320
+        name: "Pride World City",
+        lat: 18.6278,
+        lng: 73.9320
     },
 
     locations: [
 
-      { name: "Airport",       lat: 18.5822, lng: 73.9197 },
-      { name: "Kalyani Nagar", lat: 18.5484, lng: 73.9007 },
-      { name: "Koregaon Park", lat: 18.5362, lng: 73.8930 },
-      { name: "Kharadi",       lat: 18.5519, lng: 73.9506 },
-      { name: "Wagholi",       lat: 18.5793, lng: 73.9781 },
-      { name: "EON IT Park",   lat: 18.5603, lng: 73.9397 },
-      { name: "Yerwada",       lat: 18.5514, lng: 73.8786 },
-      { name: "Bhosari MIDC",  lat: 18.6298, lng: 73.8403 },
-      { name: "Moshi",         lat: 18.6794, lng: 73.8582 },
-      { name: "Alandi",        lat: 18.6775, lng: 73.8987 },
-      { name: "Chakan",        lat: 18.7606, lng: 73.8636 },
-      { name: "Hinjewadi",     lat: 18.5910, lng: 73.7389 }
+        { name: "Airport", lat: 18.5822, lng: 73.9197 },
+        { name: "Kalyani Nagar", lat: 18.5484, lng: 73.9007 },
+        { name: "Koregaon Park", lat: 18.5362, lng: 73.8930 },
+        { name: "Kharadi", lat: 18.5519, lng: 73.9506 },
+        { name: "Wagholi", lat: 18.5793, lng: 73.9781 },
+        { name: "EON IT Park", lat: 18.5603, lng: 73.9397 },
+        { name: "Yerwada", lat: 18.5514, lng: 73.8786 },
+        { name: "Bhosari MIDC", lat: 18.6298, lng: 73.8403 },
+        { name: "Moshi", lat: 18.6794, lng: 73.8582 },
+        { name: "Alandi", lat: 18.6775, lng: 73.8987 },
+        { name: "Chakan", lat: 18.7606, lng: 73.8636 },
+        { name: "Hinjewadi", lat: 18.5910, lng: 73.7389 }
 
     ]
 
-  };
+};
 
 
 
-  /*
-  =====================================
-  GLOBAL VARIABLES
-  =====================================
-  */
+/*
+=====================================
+GLOBAL VARIABLES
+=====================================
+*/
 
-  let map;
-  let currentRouteLayer = null;
-  let activeBtn = null;
+let map;
+let currentRouteLayer = null;
+let activeBtn = null;
 
 
 
-  /*
-  =====================================
-  INIT LEAFLET MAP
-  =====================================
-  */
+/*
+=====================================
+INIT LEAFLET MAP
+=====================================
+*/
 
-  function initMap() {
+function initMap() {
 
     const base = LOCATION_DATA.baseLocation;
 
@@ -716,24 +882,24 @@ const LOCATION_DATA = {
 
     // OpenStreetMap tiles — FREE, no key needed
     L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19
-      }
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }
     ).addTo(map);
 
     // Base marker (Pride World City) — permanent label always visible
     L.marker([base.lat, base.lng])
-      .addTo(map)
-      .bindTooltip("📍 Pride World City", {
-        permanent: true,
-        direction: "top",
-        className: "base-label",
-        offset: [0, -10]
-      })
-      .openTooltip();
+        .addTo(map)
+        .bindTooltip("📍 Pride World City", {
+            permanent: true,
+            direction: "top",
+            className: "base-label",
+            offset: [0, -10]
+        })
+        .openTooltip();
 
     // Render buttons
     renderLocations();
@@ -741,30 +907,30 @@ const LOCATION_DATA = {
     // Default: show Airport route
     showRoute(LOCATION_DATA.locations[0]);
 
-  }
+}
 
 
 
-  /*
-  =====================================
-  RENDER LOCATION BUTTONS
-  =====================================
-  */
+/*
+=====================================
+RENDER LOCATION BUTTONS
+=====================================
+*/
 
-  function renderLocations() {
+function renderLocations() {
 
     const container = document.getElementById("locationContainer");
 
     LOCATION_DATA.locations.forEach((location, index) => {
 
-      const btn = document.createElement("button");
+        const btn = document.createElement("button");
 
-      btn.id = "btn-" + index;
+        btn.id = "btn-" + index;
 
-      btn.className =
-        "location-btn w-full flex items-center justify-between bg-gray-400 hover:bg-black hover:text-white rounded-2xl p-4";
+        btn.className =
+            "location-btn w-full flex items-center justify-between bg-gray-400 hover:bg-black hover:text-white rounded-2xl p-4";
 
-      btn.innerHTML = `
+        btn.innerHTML = `
         <div class="flex items-center gap-3">
           <div class="w-5 h-5 rounded-full border flex items-center justify-center">
             ➜
@@ -773,42 +939,42 @@ const LOCATION_DATA = {
         </div>
       `;
 
-      btn.addEventListener("click", () => {
+        btn.addEventListener("click", () => {
 
-        // Remove active from previous
-        if (activeBtn) activeBtn.classList.remove("active");
+            // Remove active from previous
+            if (activeBtn) activeBtn.classList.remove("active");
 
-        // Set active
-        btn.classList.add("active");
-        activeBtn = btn;
+            // Set active
+            btn.classList.add("active");
+            activeBtn = btn;
 
-        showRoute(location);
+            showRoute(location);
 
-      });
+        });
 
-      container.appendChild(btn);
+        container.appendChild(btn);
 
     });
 
-  }
+}
 
 
 
-  /*
-  =====================================
-  SHOW ROUTE USING OSRM (FREE)
-  =====================================
-  */
+/*
+=====================================
+SHOW ROUTE USING OSRM (FREE)
+=====================================
+*/
 
-  function showRoute(destination) {
+function showRoute(destination) {
 
     const base = LOCATION_DATA.baseLocation;
 
     // OSRM free routing API — no key needed
     const url =
-      `https://router.project-osrm.org/route/v1/driving/` +
-      `${base.lng},${base.lat};${destination.lng},${destination.lat}` +
-      `?overview=full&geometries=geojson`;
+        `https://router.project-osrm.org/route/v1/driving/` +
+        `${base.lng},${base.lat};${destination.lng},${destination.lat}` +
+        `?overview=full&geometries=geojson`;
 
     // Update "To:" label immediately
     document.getElementById("selectedLocation").innerText = destination.name;
@@ -816,67 +982,67 @@ const LOCATION_DATA = {
     document.getElementById("durationText").innerText = "";
 
     fetch(url)
-      .then(res => res.json())
-      .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        if (data.code !== "Ok" || !data.routes.length) {
-          document.getElementById("distanceText").innerText = "Error";
-          return;
-        }
+            if (data.code !== "Ok" || !data.routes.length) {
+                document.getElementById("distanceText").innerText = "Error";
+                return;
+            }
 
-        const route = data.routes[0];
+            const route = data.routes[0];
 
-        // Distance in km
-        const distanceKm = (route.distance / 1000).toFixed(1);
+            // Distance in km
+            const distanceKm = (route.distance / 1000).toFixed(1);
 
-        // Duration in minutes
-        const durationMin = Math.round(route.duration / 60);
+            // Duration in minutes
+            const durationMin = Math.round(route.duration / 60);
 
-        // Update UI
-        document.getElementById("distanceText").innerText =
-          distanceKm + " KM";
+            // Update UI
+            document.getElementById("distanceText").innerText =
+                distanceKm + " KM";
 
-        document.getElementById("durationText").innerText =
-          durationMin + " Minutes";
+            document.getElementById("durationText").innerText =
+                durationMin + " Minutes";
 
-        // Remove previous route from map
-        if (currentRouteLayer) {
-          map.removeLayer(currentRouteLayer);
-        }
+            // Remove previous route from map
+            if (currentRouteLayer) {
+                map.removeLayer(currentRouteLayer);
+            }
 
-        // Draw new route as polyline
-        const coords = route.geometry.coordinates.map(
-          c => [c[1], c[0]]   // OSRM gives [lng, lat], Leaflet needs [lat, lng]
-        );
+            // Draw new route as polyline
+            const coords = route.geometry.coordinates.map(
+                c => [c[1], c[0]]   // OSRM gives [lng, lat], Leaflet needs [lat, lng]
+            );
 
-        currentRouteLayer = L.polyline(coords, {
-          color: "#000000",
-          weight: 5,
-          opacity: 0.8
-        }).addTo(map);
+            currentRouteLayer = L.polyline(coords, {
+                color: "#000000",
+                weight: 5,
+                opacity: 0.8
+            }).addTo(map);
 
-        // Add destination marker
-        L.marker([destination.lat, destination.lng])
-          .addTo(map)
-          .bindPopup(`<b>📍 ${destination.name}</b>`)
-          .openPopup();
+            // Add destination marker
+            L.marker([destination.lat, destination.lng])
+                .addTo(map)
+                .bindPopup(`<b>📍 ${destination.name}</b>`)
+                .openPopup();
 
-        // Fit map to show full route
-        map.fitBounds(currentRouteLayer.getBounds(), { padding: [40, 40] });
+            // Fit map to show full route
+            map.fitBounds(currentRouteLayer.getBounds(), { padding: [40, 40] });
 
-      })
-      .catch(() => {
-        document.getElementById("distanceText").innerText = "No route";
-        document.getElementById("durationText").innerText =
-          "Check internet connection";
-      });
+        })
+        .catch(() => {
+            document.getElementById("distanceText").innerText = "No route";
+            document.getElementById("durationText").innerText =
+                "Check internet connection";
+        });
 
-  }
+}
 
 
 
-  // Start the map
-  initMap();
+// Start the map
+initMap();
 // location end
 
 

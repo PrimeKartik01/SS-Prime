@@ -2,18 +2,21 @@
 export const slides = [
     {
         image: "images/header-slider/pride-world-city-01.webp",
+        subtitle:"Pride World City Flats",
         title: "Welcome to Pride World City",
         description:
             " Welcome to Pride World City – Where Life Comes Together"
     },
     {
         image: "images/header-slider/pride-world-city-02.webp",
+        subtitle:"Luxury Apartments in Pune",
         title: "Modern Apartments",
         description:
             "Your Dream Home in Pune's Most Integrated Township"
     },
     {
         image: "images/header-slider/pride-world-city-03.webp",
+        subtitle:"Township Projects in Pune",
         title: "Premium Residences",
         description:
             "Premium Residences in a Thriving Urban Community"
