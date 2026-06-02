@@ -1,0 +1,42 @@
+{
+    "payload": {
+        "name": "Mohan",
+        "state": "",
+        "city": "Delhi",
+        "location": "Montreal",
+        "budget": "18000000",
+        "notes": "Website lead from modalEnquiryForm. Flat: Duplex 3 BHK. Availability: Available.",
+        "email": "mohan@gmail.com",
+        "countryCode": "91",
+        "mobile": "7568493210",
+        "project": "Montreal",
+        "property": "Duplex 3 BHK",
+        "leadExpectedBudget": "18000000",
+        "propertyType": "Flat",
+        "submittedDate": "02-06-26",
+        "submittedTime": "10:30:37",
+        "LeadId": "",
+        "subsource": "PWC Google Ads",
+        "leadStatus": "New Lead",
+        "callRecordingUrl": "",
+        "scheduledDate": "",
+        "additionalProperties": {
+            "price": "₹ 1.8 Cr",
+            "availability": "Available",
+            "formName": "PWC Web Lead From",
+            "submissionIp": "::1"
+        }
+    },
+    "response": {
+        "success": true,
+        "http_code": 200,
+        "response": {
+            "succeeded": true,
+            "message": null,
+            "errors": null,
+            "data": true,
+            "actionCode": null,
+            "isClockInMandatory": false
+        }
+    }
+}

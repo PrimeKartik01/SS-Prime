@@ -2,7 +2,7 @@
 export const slides = [
     {
         image: "images/header-slider/pride-world-city-01.webp",
-        subtitle:"Pride World City Flats",
+        subtitle:"Pride World City Pune",
         title: "Welcome to Pride World City",
         description:
             " Welcome to Pride World City – Where Life Comes Together"
@@ -39,11 +39,12 @@ export const projects = [
         ],
 
         features: [
+            "2BHK, 3BHK & 4.5BHK Apartments",
             "Hill-facing Apartments",
             "Smart Home Automation",
             "Wooden Flooring in Master Bedroom",
             "Designer Balconies with LED False-ceiling",
-            "40+ Lifestyle Amenities"
+            "45+ Lifestyle Amenities"
         ],
 
         images: [
@@ -81,9 +82,10 @@ export const projects = [
         ],
 
         features: [
+            "2BHK, 3BHK & 4BHK Duplex Apartments",
             "True Two-Floor Duplex Homes",
             "Double-height Living Area",
-            "40+ Premium Amenities",
+            "45+ Premium Amenities",
             "Smart Home Automation",
             "Superior Specifications"
         ],
@@ -127,7 +129,7 @@ export const projects = [
 
         features: [
             "Two Podiums with Panoramic Views",
-            "Double Balconies in Every 2 BHK",
+            "2BHK (S) and 2BHK (L) Apartments",
             "100% Covered Multilevel Parking",
             "L-Shaped Living-Dining",
             "Open Dry Balcony"
@@ -161,20 +163,35 @@ export const projectFlats = {
     Miami: [
         {
             type: "2 BHK",
-            price: "₹ 85 Lakhs",
+            price: "₹ 89 Lakhs",
             available: "Available"
         },
         {
             type: "3 BHK",
             price: "₹ 1.2 Cr",
             available: "Few Units Left"
+        },
+        {
+            type: "4.5 BHK",
+            price: "₹ 2.70 Cr",
+            available: "Few Units Left"
         }
     ],
 
     Montreal: [
         {
+            type: "Duplex 2 BHK",
+            price: "₹ 1 Cr",
+            available: "Available"
+        },
+        {
             type: "Duplex 3 BHK",
-            price: "₹ 1.8 Cr",
+            price: "₹ 1.68 Cr",
+            available: "Available"
+        },
+        {
+            type: "Duplex 4 BHK",
+            price: "₹ 2.30 Cr",
             available: "Available"
         }
     ],
@@ -182,7 +199,7 @@ export const projectFlats = {
     Boston: [
         {
             type: "2 BHK",
-            price: "₹ 75 Lakhs",
+            price: "₹ 69.99 Lakhs",
             available: "Available"
         }
     ],
@@ -191,7 +208,7 @@ export const projectFlats = {
 // amenities data
 export const amenitiesData = [
     {
-        title: "Learning Academy",
+        title: "Global International School",
         svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-slate-700">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -215,7 +232,7 @@ export const amenitiesData = [
               </svg>`
     },
     {
-        title: "Global International School",
+        title: "Zudio Shopping Center",
         svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-slate-700">
                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/>
                 <path d="M14.5 10.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM9.5 10.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>

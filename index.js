@@ -141,9 +141,11 @@ if (slider) {
                     ${slide.description}
                 </p>
 
-                <button class="mt-6 px-6 py-3 rounded-full bg-white/90 text-black text-sm md:text-base font-medium hover:bg-white transition-all duration-300">
-                    Explore Properties
-                </button>
+                <div class="mt-6">
+                    <a class=" px-6 py-3 rounded-full bg-white/90 text-black text-sm md:text-base font-medium hover:bg-white transition-all duration-300" href="#projects-container">
+                        Explore Properties
+                    </a>
+                </div>
 
             </div>
 
@@ -427,6 +429,8 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
         }
 
         const flat = projectFlats[project][flatIndex]?.type || "";
+        const price = projectFlats[project][flatIndex]?.price || "";
+        const availability = projectFlats[project][flatIndex]?.available || "";
 
         if (!flat) {
             showToast("Please select a valid flat type.", "error");
@@ -446,7 +450,9 @@ function initEnquiryForm(formId, selectProjId, selectFlatId, pricingBoxId, price
                     email,
                     city,
                     project,
-                    flat
+                    flat,
+                    price,
+                    availability
                 })
             });
 
@@ -723,7 +729,7 @@ if (container) {
                 <a href="${project.link}"
                     data-brochure="${project.link}"
                     data-project="${project.name}"
-                    class="brochure-link flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl border border-[#d4af37]/40 bg-white/60 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
+                    class="brochure-link flex-1 py-2 md:py-7 text-sm md:text-base rounded-xl border border-[#d4af37]/40 bg-yellow-200 text-center text-[#1f2937] hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] transition-all duration-300">
 
                     Download Brochure
 

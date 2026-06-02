@@ -1,7 +1,7 @@
 <?php
 
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://prime-worldcity.in");
+header("Access-Control-Allow-Origin: https://prideworld-city.in");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 /*
 |--------------------------------------------------------------------------
 | Rate Limit
-| 5 Requests / 10 Seconds / IP
+| 6 Requests / 24 Hours / IP
 |--------------------------------------------------------------------------
 */
 
@@ -51,8 +51,8 @@ if (!is_dir($rateDir)) {
 
 $rateFile = $rateDir . "/" . md5($ip) . ".json";
 
-$window = 20; // 10 seconds
-$maxRequests = 88888;
+$window = 24 * 60 * 60; // 24 hours
+$maxRequests = 6;
 
 $now = time();
 
@@ -170,6 +170,30 @@ $city = trim($data['city'] ?? '');
 $project = trim($data['project'] ?? '');
 $flat = trim($data['flat'] ?? '');
 $source = trim($data['source'] ?? '');
+$price = trim($data['price'] ?? '');
+$availability = trim($data['availability'] ?? '');
+
+function parseBudgetValue($price) {
+    if (empty($price)) {
+        return '';
+    }
+
+    if (preg_match('/([\d\.]+)\s*Cr/i', $price, $matches)) {
+        return strval((int) round(floatval($matches[1]) * 10000000));
+    }
+
+    if (preg_match('/([\d\.]+)\s*Lakhs?/i', $price, $matches)) {
+        return strval((int) round(floatval($matches[1]) * 100000));
+    }
+
+    if (preg_match('/([\d,]+)/', $price, $matches)) {
+        return preg_replace('/[^\d]/', '', $matches[1]);
+    }
+
+    return preg_replace('/[^\d]/', '', $price);
+}
+
+$budget = parseBudgetValue($price);
 
 /*
 |--------------------------------------------------------------------------
@@ -247,31 +271,129 @@ $lead = [
     "email" => $email,
     "city" => $city,
     "project" => $project,
-    "flat" => $flat
+    "flat" => $flat,
+    "price" => $price,
+    "availability" => $availability,
+    "budget" => $budget
 ];
+
+$crmPayload = [
+    "name" => $name,
+    "state" => "",
+    "city" => $city,
+    "location" => $project,
+    "budget" => $budget ?: $price,
+    "notes" => "Website lead from {$source}. Flat: {$flat}. Availability: {$availability}.",
+    "email" => $email,
+    "countryCode" => "91",
+    "mobile" => $number,
+    "project" => $project,
+    "property" => $flat,
+    "leadExpectedBudget" => $budget ?: $price,
+    "propertyType" => "Flat",
+    "submittedDate" => date("d-m-y"),
+    "submittedTime" => date("H:i:s"),
+    "LeadId" => "",
+    "subsource" => "PWC Google Ads",
+    "leadStatus" => "New Lead",
+    "callRecordingUrl" => "",
+    "scheduledDate" => "",
+    "additionalProperties" => [
+        "price" => $price,
+        "availability" => $availability,
+        "formName" => "PWC Web Lead From",
+        "submissionIp" => $ip
+    ]
+];
+
+function sendCrmLead($url, $apiKey, $payload) {
+    if (!function_exists('curl_init')) {
+        return [
+            "success" => false,
+            "http_code" => 0,
+            "response" => null,
+            "error" => "cURL is not available on this server"
+        ];
+    }
+
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "API-Key: {$apiKey}",
+        "Content-Type: application/json"
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([$payload], JSON_UNESCAPED_UNICODE));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $error = curl_error($ch);
+
+    if ($response === false || $httpCode < 200 || $httpCode >= 300) {
+        return [
+            "success" => false,
+            "http_code" => $httpCode,
+            "response" => $response,
+            "error" => $error
+        ];
+    }
+
+    $decoded = json_decode($response, true);
+
+    return [
+        "success" => true,
+        "http_code" => $httpCode,
+        "response" => $decoded ?: $response
+    ];
+}
+
+$crmApiUrl = "https://connect.leadrat.com/api/v1/integration/Website";
+$crmApiKey = "YWIxZGVhODQtNjRjNy00ZmRmLWFhZjctNjUzYzYxYTdlNjk1";
+$crmResult = sendCrmLead($crmApiUrl, $crmApiKey, $crmPayload);
+file_put_contents(
+    __DIR__ . "/crm_response.txt",
+    json_encode([
+        "payload" => $crmPayload,
+        "response" => $crmResult
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL,
+    FILE_APPEND | LOCK_EX
+);
+
+if (!$crmResult["success"]) {
+    $lead["crm_error"] = $crmResult["error"] ?: $crmResult["response"];
+    $lead["crm_http_code"] = $crmResult["http_code"];
+} else {
+    $lead["crm_response"] = $crmResult["response"];
+}
 
 $line = json_encode(
     $lead,
     JSON_UNESCAPED_UNICODE
 ) . PHP_EOL;
 
-// $res = file_put_contents(
-//     __DIR__ . "/leads.txt",
-//     $line,
-//     FILE_APPEND | LOCK_EX
-// );
+$res = file_put_contents(
+    __DIR__ . "/leads.txt",
+    $line,
+    FILE_APPEND | LOCK_EX
+);
 
-// if ($res === false) {
+if ($res === false) {
 
-//     http_response_code(500);
+    http_response_code(500);
 
-//     echo json_encode([
-//         "success" => false,
-//         "error" => "Failed to save lead"
-//     ]);
+    echo json_encode([
+        "success" => false,
+        "error" => "Failed to save lead"
+    ]);
 
-//     exit;
-// }
+    exit;
+}
 
 /*
 |--------------------------------------------------------------------------
